@@ -3,8 +3,8 @@ package com.hzgc.collect.expand.processer;
 import com.hzgc.collect.expand.receiver.Event;
 import com.hzgc.collect.expand.util.CollectProperties;
 import com.hzgc.collect.expand.util.JsonUtil;
-import com.hzgc.common.jni.FaceAttribute;
-import com.hzgc.common.jni.FaceFunction;
+import com.hzgc.jni.FaceAttribute;
+import com.hzgc.jni.FaceFunction;
 
 import java.util.concurrent.BlockingQueue;
 
