@@ -7,25 +7,17 @@
     <groupId>com.hzgc</groupId>
     <artifactId>collect</artifactId>
     <version>1.0</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
     <properties>
         <mina.version>2.0.16</mina.version>
         <zookeeper.version>3.4.10</zookeeper.version>
         <kafka.version>1.0.0</kafka.version>
         <rocketmq.version>4.2.0</rocketmq.version>
         <jackson.version>2.9.4</jackson.version>
+        <jni.version>1.0</jni.version>
+        <jfiglet.version>0.0.3</jfiglet.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.mina</groupId>
@@ -50,12 +42,12 @@
         <dependency>
             <groupId>com.hzgc</groupId>
             <artifactId>jni</artifactId>
-            <version>1.0</version>
+            <version>${jni.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.lalyos</groupId>
             <artifactId>jfiglet</artifactId>
-            <version>0.0.3</version>
+            <version>${jfiglet.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -68,4 +60,38 @@
             <version>${jackson.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>FaceCollect</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assembly/assembly.xml</descriptor>
+                            </descriptors>
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>FaceCollect</finalName>
+    </build>
 </project>
