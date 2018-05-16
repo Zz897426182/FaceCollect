@@ -20,7 +20,6 @@
 package com.hzgc.collect.ftp;
 
 import com.hzgc.collect.ftp.impl.DefaultConnectionConfig;
-import com.hzgc.common.util.file.ResourceFileUtil;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -60,7 +59,7 @@ public class ConnectionConfigFactory {
         FtpServerFactory factory = new FtpServerFactory();
         Properties props = new Properties();
         try {
-            props.load(ResourceFileUtil.loadResourceInputStream("users.properties"));
+            props.load(ClassLoader.getSystemResourceAsStream("users.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

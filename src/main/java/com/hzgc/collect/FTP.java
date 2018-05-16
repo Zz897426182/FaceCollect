@@ -12,7 +12,7 @@ import com.hzgc.collect.ftp.ftplet.FtpException;
 import com.hzgc.collect.ftp.listener.ListenerFactory;
 import com.hzgc.collect.ftp.usermanager.PropertiesUserManagerFactory;
 import com.hzgc.collect.expand.util.CollectProperties;
-import com.hzgc.common.jni.NativeFunction;
+import com.hzgc.jni.NativeFunction;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -68,14 +68,10 @@ public class FTP extends ClusterOverFtp implements Serializable {
                 ClassLoader.getSystemResource("log4j.properties").getPath(), 5000);
         LOG.info("Dynamic log configuration is successful! Log configuration file refresh time 5000ms");
 
-        //ftp capture subscription
-        new FtpSwitch();
-        FtpSubscriptionClient ftpSubscription = new FtpSubscriptionClient(
-                Integer.valueOf(CollectProperties.getZookeeperSessionTimeout()),
+        SubscribeWatcher subscribeWatcher = new SubscribeWatcher(CollectProperties.getZookeeperSessionTimeout(),
                 CollectProperties.getZookeeperAddress(),
                 CollectProperties.getZookeeperSubscribePath(),
-                Boolean.valueOf(CollectProperties.getZookeeperWatcher()));
-        ftpSubscription.createFtpSubscriptionZnode();
+                new SubscribeInfo());
 
         FtpServer server = serverFactory.createServer();
         try {
@@ -83,8 +79,6 @@ public class FTP extends ClusterOverFtp implements Serializable {
         } catch (FtpException e) {
             e.printStackTrace();
         }
-        ReceiveThread thread = new ReceiveThread();
-        thread.start();
     }
 
     public static void main(String args[]) throws Exception {

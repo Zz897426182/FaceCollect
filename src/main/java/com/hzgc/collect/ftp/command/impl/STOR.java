@@ -1,8 +1,8 @@
 package com.hzgc.collect.ftp.command.impl;
 
 import com.hzgc.collect.expand.receiver.Event;
+import com.hzgc.collect.expand.subscribe.SubscribeInfo;
 import com.hzgc.collect.expand.util.*;
-import com.hzgc.collect.expand.subscribe.ReceiveIpcIds;
 import com.hzgc.collect.ftp.command.AbstractCommand;
 import com.hzgc.collect.ftp.ftplet.*;
 import com.hzgc.collect.ftp.impl.*;
@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.util.List;
 
 public class STOR extends AbstractCommand {
     private final Logger LOG = LoggerFactory.getLogger(STOR.class);
@@ -147,10 +146,9 @@ public class STOR extends AbstractCommand {
                     if (fileName.contains(".jpg") && faceNum > 0) {
 
                         FtpPathMetaData metaData = FtpPathParser.getFtpPathMetaData(fileName);
-                        if (FtpSwitch.isFtpSwitch()) {
-                            List<String> subscriptionList = ReceiveIpcIds.getInstance().getIpcIdList();
-                            if (!subscriptionList.isEmpty()) {
-                                if (subscriptionList.contains(metaData.getIpcid())) {
+                        if (CollectProperties.isFtpSubscribeSwitch()) {
+                            if (SubscribeInfo.getIpcList().isEmpty()) {
+                                if (SubscribeInfo.getIpcList().contains(metaData.getIpcid())) {
                                     sendMQAndReceive(file, metaData, context);
                                 }
                             } else {
