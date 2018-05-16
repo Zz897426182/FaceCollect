@@ -3,7 +3,7 @@
     <id>FaceCollect</id>
     <includeBaseDirectory>false</includeBaseDirectory>
     <formats>
-        <!--<format>dir</format>-->
+        <format>dir</format>
         <format>tar.gz</format>
     </formats>
     <fileSets>
@@ -18,6 +18,13 @@
                 <include>*.properties</include>
             </includes>
             <outputDirectory>RealTimeFaceCompare/ftp/conf</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/target</directory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <outputDirectory>RealTimeFaceCompare/ftp</outputDirectory>
         </fileSet>
     </fileSets>
     <dependencySets>
