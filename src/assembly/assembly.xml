@@ -3,7 +3,7 @@
     <id>FaceCollect</id>
     <includeBaseDirectory>false</includeBaseDirectory>
     <formats>
-        <format>dir</format>
+        <!--<format>dir</format>-->
         <format>tar.gz</format>
     </formats>
     <fileSets>
