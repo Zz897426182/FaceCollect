@@ -14,11 +14,9 @@ public class SubscribeWatcher implements Serializable, Watcher {
     private static Logger LOG = Logger.getLogger(SubscribeWatcher.class);
     private String rootPath;
     private ZooKeeper zkClient;
-    private SubscribeInfo subInfo;
 
-    public SubscribeWatcher(int sessionTimeOut, String zkAddress, String rootPath, SubscribeInfo subInfo) {
+    public SubscribeWatcher(int sessionTimeOut, String zkAddress, String rootPath) {
         this.rootPath = rootPath;
-        this.subInfo = subInfo;
         try {
             this.zkClient = new ZooKeeper(zkAddress,
                     sessionTimeOut,

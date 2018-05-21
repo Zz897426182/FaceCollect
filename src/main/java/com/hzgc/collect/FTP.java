@@ -1,5 +1,6 @@
 package com.hzgc.collect;
 
+import com.hzgc.collect.expand.register.FtpRegister;
 import com.hzgc.collect.expand.subscribe.*;
 import com.hzgc.collect.expand.util.FtpLogo;
 import com.hzgc.collect.ftp.ClusterOverFtp;
@@ -70,8 +71,12 @@ public class FTP extends ClusterOverFtp implements Serializable {
 
         SubscribeWatcher subscribeWatcher = new SubscribeWatcher(CollectProperties.getZookeeperSessionTimeout(),
                 CollectProperties.getZookeeperAddress(),
-                CollectProperties.getZookeeperSubscribePath(),
-                new SubscribeInfo());
+                CollectProperties.getZookeeperSubscribePath()
+        );
+        subscribeWatcher.startSubscribe();
+
+        FtpRegister ftpRegister = new FtpRegister();
+        ftpRegister.registFtp();
 
         FtpServer server = serverFactory.createServer();
         try {

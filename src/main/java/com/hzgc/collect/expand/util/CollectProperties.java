@@ -22,7 +22,6 @@ public class CollectProperties implements Serializable {
     private static int zookeeperSessionTimeout;
     private static String zookeeperAddress;
     private static String zookeeperSubscribePath;
-    private static String zookeeperWatcher;
     private static boolean ftpSubscribeSwitch;
     private static String kafkaFaceObjectTopic;
     private static String rocketmqAddress;
@@ -30,7 +29,28 @@ public class CollectProperties implements Serializable {
     private static String rokcetmqCaptureGroup;
     private static String hostname;
     private static String ftpVersion;
+    private static String proxyIpAddress;
+    private static String proxyPort;
+    private static String registerPath;
+    private static String ftpPathRule;
+    private static String ftpAccount;
+    private static String ftpPassword;
 
+    public static String getFtpAccount() {
+        return ftpAccount;
+    }
+
+    public static void setFtpAccount(String ftpAccount) {
+        CollectProperties.ftpAccount = ftpAccount;
+    }
+
+    public static String getFtpPassword() {
+        return ftpPassword;
+    }
+
+    public static void setFtpPassword(String ftpPassword) {
+        CollectProperties.ftpPassword = ftpPassword;
+    }
 
     static {
         try {
@@ -45,7 +65,6 @@ public class CollectProperties implements Serializable {
             setZookeeperSessionTimeout(Integer.parseInt(props.getProperty("zookeeper.session.timeout")));
             setZookeeperAddress(props.getProperty("zookeeper.address"));
             setZookeeperSubscribePath(props.getProperty("zookeeper.subscribe.path"));
-            setZookeeperWatcher(props.getProperty("zookeeper.watcher"));
             setFtpSubscribeSwitch(Boolean.parseBoolean(props.getProperty("ftp.subscribe.switch")));
             setKafkaFaceObjectTopic(props.getProperty("kafka.faceobject.topic"));
             setRocketmqAddress(props.getProperty("rocketmq.address"));
@@ -53,11 +72,45 @@ public class CollectProperties implements Serializable {
             setRokcetmqCaptureGroup(props.getProperty("rocketmq.capture.group"));
             setHostname(InetAddress.getLocalHost().getHostName());
             setFtpVersion(props.getProperty("ftp.version"));
+            setProxyIpAddress(props.getProperty("proxy.ip"));
+            setProxyPort(props.getProperty("proxy.port"));
+            setRegisterPath(props.getProperty("zookeeper.register.path"));
+            setFtpPathRule(props.getProperty("ftp.pathRule"));
+            setFtpAccount(props.getProperty("ftp.account"));
+            setFtpPassword(props.getProperty("ftp.password"));
 
         } catch (IOException e) {
             e.printStackTrace();
             LOG.error("Catch an unknown error, can't load the configuration file collect.properties");
         }
+    }
+
+    public static String getFtpPathRule() {
+        return ftpPathRule;
+    }
+
+    public static void setFtpPathRule(String ftpPathRule) {
+        CollectProperties.ftpPathRule = ftpPathRule;
+    }
+
+    public static String getRegisterPath() {
+        return registerPath;
+    }
+
+    public static void setRegisterPath(String registerPath) {
+        CollectProperties.registerPath = registerPath;
+    }
+
+    public static String getProxyPort() {
+        return proxyPort;
+    }
+
+    public static void setProxyPort(String proxyPort) {
+        CollectProperties.proxyPort = proxyPort;
+    }
+
+    public static String getProxyIpAddress() {
+        return proxyIpAddress;
     }
 
     public static Properties getProps() {
@@ -84,7 +137,7 @@ public class CollectProperties implements Serializable {
         CollectProperties.props = props;
     }
 
-    static String getFtpIp() {
+    public static String getFtpIp() {
         return ftpIp;
     }
 
@@ -172,14 +225,6 @@ public class CollectProperties implements Serializable {
         CollectProperties.zookeeperSubscribePath = zookeeperSubscribePath;
     }
 
-    public static String getZookeeperWatcher() {
-        return zookeeperWatcher;
-    }
-
-    private static void setZookeeperWatcher(String zookeeperWatcher) {
-        CollectProperties.zookeeperWatcher = zookeeperWatcher;
-    }
-
     public static String getKafkaFaceObjectTopic() {
         return kafkaFaceObjectTopic;
     }
@@ -210,5 +255,9 @@ public class CollectProperties implements Serializable {
 
     private static void setRokcetmqCaptureGroup(String rokcetmqCaptureGroup) {
         CollectProperties.rokcetmqCaptureGroup = rokcetmqCaptureGroup;
+    }
+
+    public static void setProxyIpAddress(String proxyIpAddress) {
+        CollectProperties.proxyIpAddress = proxyIpAddress;
     }
 }
