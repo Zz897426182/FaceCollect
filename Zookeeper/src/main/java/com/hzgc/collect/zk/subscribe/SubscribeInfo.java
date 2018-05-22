@@ -1,4 +1,4 @@
-package com.hzgc.collect.expand.subscribe;
+package com.hzgc.collect.zk.subscribe;
 
 import java.util.ArrayList;
 import java.util.List;

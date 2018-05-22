@@ -1,8 +1,8 @@
-package com.hzgc.collect.ftp.expand.processer;
+package com.hzgc.collect.expand.processer;
 
-import com.hzgc.collect.ftp.expand.receiver.Event;
-import com.hzgc.collect.ftp.expand.util.CollectProperties;
-import com.hzgc.collect.ftp.expand.util.JsonUtil;
+import com.hzgc.collect.expand.receiver.Event;
+import com.hzgc.collect.expand.util.CollectProperties;
+import com.hzgc.collect.expand.util.JsonUtil;
 import com.hzgc.jni.FaceAttribute;
 import com.hzgc.jni.FaceFunction;
 
@@ -33,7 +33,7 @@ public class ProcessThread implements Runnable {
                             event.getFtpHostNameUrlPath(),
                             event.getBigPicurl(),
                             CollectProperties.getHostname());
-                    ProcessCallBack callBack = new ProcessCallBack(event.getFtpIpUrlPaht(),
+                    ProcessCallBack callBack = new ProcessCallBack(event.getFtpIpUrlPath(),
                             System.currentTimeMillis());
                     ProducerKafka.getInstance().sendKafkaMessage(
                             CollectProperties.getRocketmqCaptureTopic(),

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ftplet;
+package com.hzgc.collect.ftp.ftplet;
 
 /**
  * Interface for an authority granted to the user, typical example is write

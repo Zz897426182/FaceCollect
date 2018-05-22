@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
-import com.hzgc.collect.ftp.ftp.ssl.SslConfiguration;
+import com.hzgc.collect.ftp.ssl.SslConfiguration;
 
 import java.net.InetAddress;
 

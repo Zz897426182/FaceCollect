@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.message;
+package com.hzgc.collect.ftp.message;
 
 import java.util.List;
 import java.util.Map;

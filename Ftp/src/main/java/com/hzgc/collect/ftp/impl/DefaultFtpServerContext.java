@@ -17,26 +17,26 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.expand.receiver.ReceiverScheduler;
-import com.hzgc.collect.ftp.ftp.ConnectionConfig;
-import com.hzgc.collect.ftp.ftp.ConnectionConfigFactory;
-import com.hzgc.collect.ftp.ftp.command.CommandFactory;
-import com.hzgc.collect.ftp.ftp.command.CommandFactoryFactory;
-import com.hzgc.collect.ftp.ftp.ftplet.*;
-import com.hzgc.collect.ftp.ftp.ftpletcontainer.FtpletContainer;
-import com.hzgc.collect.ftp.ftp.ftpletcontainer.impl.DefaultFtpletContainer;
-import com.hzgc.collect.ftp.ftp.listener.ListenerFactory;
-import com.hzgc.collect.ftp.ftp.message.MessageResource;
-import com.hzgc.collect.ftp.ftp.nativefs.filesystem.NativeFileSystemFactory;
-import com.hzgc.collect.ftp.ftp.usermanager.PropertiesUserManagerFactory;
-import com.hzgc.collect.ftp.ftp.usermanager.impl.BaseUser;
-import com.hzgc.collect.ftp.ftp.usermanager.impl.ConcurrentLoginPermission;
-import com.hzgc.collect.ftp.ftp.usermanager.impl.WritePermission;
-import com.hzgc.collect.ftp.ftp.listener.Listener;
-import com.hzgc.collect.ftp.ftp.message.MessageResourceFactory;
-import com.hzgc.collect.ftp.ftp.usermanager.impl.TransferRatePermission;
+import com.hzgc.collect.expand.receiver.ReceiverScheduler;
+import com.hzgc.collect.ftp.ConnectionConfig;
+import com.hzgc.collect.ftp.ConnectionConfigFactory;
+import com.hzgc.collect.ftp.command.CommandFactory;
+import com.hzgc.collect.ftp.command.CommandFactoryFactory;
+import com.hzgc.collect.ftp.ftplet.*;
+import com.hzgc.collect.ftp.ftpletcontainer.FtpletContainer;
+import com.hzgc.collect.ftp.ftpletcontainer.impl.DefaultFtpletContainer;
+import com.hzgc.collect.ftp.listener.Listener;
+import com.hzgc.collect.ftp.listener.ListenerFactory;
+import com.hzgc.collect.ftp.message.MessageResource;
+import com.hzgc.collect.ftp.message.MessageResourceFactory;
+import com.hzgc.collect.ftp.nativefs.filesystem.NativeFileSystemFactory;
+import com.hzgc.collect.ftp.usermanager.PropertiesUserManagerFactory;
+import com.hzgc.collect.ftp.usermanager.impl.BaseUser;
+import com.hzgc.collect.ftp.usermanager.impl.ConcurrentLoginPermission;
+import com.hzgc.collect.ftp.usermanager.impl.TransferRatePermission;
+import com.hzgc.collect.ftp.usermanager.impl.WritePermission;
 import org.apache.mina.filter.executor.OrderedThreadPoolExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

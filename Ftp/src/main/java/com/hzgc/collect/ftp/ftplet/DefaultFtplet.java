@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ftplet;
+package com.hzgc.collect.ftp.ftplet;
 
 import java.io.IOException;
 

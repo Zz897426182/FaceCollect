@@ -17,10 +17,10 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.usermanager;
+package com.hzgc.collect.ftp.usermanager;
 
-import com.hzgc.collect.ftp.ftp.ftplet.UserManager;
-import com.hzgc.collect.ftp.ftp.usermanager.impl.PropertiesUserManager;
+import com.hzgc.collect.ftp.ftplet.UserManager;
+import com.hzgc.collect.ftp.usermanager.impl.PropertiesUserManager;
 
 import java.io.File;
 import java.net.URL;

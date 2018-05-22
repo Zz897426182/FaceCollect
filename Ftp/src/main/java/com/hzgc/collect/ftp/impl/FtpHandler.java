@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FtpReply;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpRequest;
-import com.hzgc.collect.ftp.ftp.listener.Listener;
+import com.hzgc.collect.ftp.ftplet.FtpReply;
+import com.hzgc.collect.ftp.ftplet.FtpRequest;
+import com.hzgc.collect.ftp.listener.Listener;
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;

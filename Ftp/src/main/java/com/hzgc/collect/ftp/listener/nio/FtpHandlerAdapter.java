@@ -17,14 +17,14 @@
  *  under the License.
  * 
  */
-package com.hzgc.collect.ftp.ftp.listener.nio;
+package com.hzgc.collect.ftp.listener.nio;
 
-import com.hzgc.collect.ftp.ftp.impl.FtpServerContext;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpReply;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpRequest;
-import com.hzgc.collect.ftp.ftp.impl.DefaultFtpRequest;
-import com.hzgc.collect.ftp.ftp.impl.FtpHandler;
-import com.hzgc.collect.ftp.ftp.impl.FtpIoSession;
+import com.hzgc.collect.ftp.ftplet.FtpReply;
+import com.hzgc.collect.ftp.ftplet.FtpRequest;
+import com.hzgc.collect.ftp.impl.DefaultFtpRequest;
+import com.hzgc.collect.ftp.impl.FtpHandler;
+import com.hzgc.collect.ftp.impl.FtpIoSession;
+import com.hzgc.collect.ftp.impl.FtpServerContext;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;

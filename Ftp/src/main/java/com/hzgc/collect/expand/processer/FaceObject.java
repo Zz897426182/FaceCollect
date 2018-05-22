@@ -1,4 +1,4 @@
-package com.hzgc.collect.ftp.expand.processer;
+package com.hzgc.collect.expand.processer;
 
 import com.hzgc.jni.FaceAttribute;
 

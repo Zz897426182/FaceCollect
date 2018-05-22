@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.util;
+package com.hzgc.collect.ftp.util;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.FtpException;
 
 import java.io.File;
 import java.net.InetAddress;

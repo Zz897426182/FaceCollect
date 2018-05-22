@@ -1,4 +1,4 @@
-package com.hzgc.collect.ftp.expand.util;
+package com.hzgc.collect.expand.util;
 
 public class FtpLogo {
     public static String getLogo() {

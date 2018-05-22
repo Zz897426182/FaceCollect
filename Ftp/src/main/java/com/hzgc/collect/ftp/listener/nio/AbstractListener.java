@@ -17,15 +17,15 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.listener.nio;
+package com.hzgc.collect.ftp.listener.nio;
 
-import com.hzgc.collect.ftp.ftp.DataConnectionConfiguration;
-import com.hzgc.collect.ftp.ftp.ipfilter.SessionFilter;
-import com.hzgc.collect.ftp.ftp.ipfilter.IpFilterType;
-import com.hzgc.collect.ftp.ftp.ipfilter.RemoteIpFilter;
-import com.hzgc.collect.ftp.ftp.listener.Listener;
-import com.hzgc.collect.ftp.ftp.listener.ListenerFactory;
-import com.hzgc.collect.ftp.ftp.ssl.SslConfiguration;
+import com.hzgc.collect.ftp.DataConnectionConfiguration;
+import com.hzgc.collect.ftp.ipfilter.IpFilterType;
+import com.hzgc.collect.ftp.ipfilter.RemoteIpFilter;
+import com.hzgc.collect.ftp.ipfilter.SessionFilter;
+import com.hzgc.collect.ftp.listener.Listener;
+import com.hzgc.collect.ftp.listener.ListenerFactory;
+import com.hzgc.collect.ftp.ssl.SslConfiguration;
 import org.apache.mina.filter.firewall.Subnet;
 
 import java.net.InetAddress;

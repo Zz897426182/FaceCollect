@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.nativefs.filesystem.impl;
+package com.hzgc.collect.ftp.nativefs.filesystem.impl;
 
 import java.io.File;
 import java.io.FileFilter;

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
 /**
  * Interface for providing the configuration for the control socket connections.

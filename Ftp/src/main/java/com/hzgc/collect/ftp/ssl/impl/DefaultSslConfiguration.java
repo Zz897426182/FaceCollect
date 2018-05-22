@@ -17,12 +17,12 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ssl.impl;
+package com.hzgc.collect.ftp.ssl.impl;
 
-import com.hzgc.collect.ftp.ftp.ssl.ClientAuth;
-import com.hzgc.collect.ftp.ftp.ssl.SslConfiguration;
-import com.hzgc.collect.ftp.ftp.ssl.SslConfigurationFactory;
-import com.hzgc.collect.ftp.ftp.util.ClassUtils;
+import com.hzgc.collect.ftp.ssl.ClientAuth;
+import com.hzgc.collect.ftp.ssl.SslConfiguration;
+import com.hzgc.collect.ftp.ssl.SslConfigurationFactory;
+import com.hzgc.collect.ftp.util.ClassUtils;
 
 import javax.net.ssl.*;
 import java.security.GeneralSecurityException;

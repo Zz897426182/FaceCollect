@@ -17,10 +17,10 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.DataConnectionException;
-import com.hzgc.collect.ftp.ftp.ftplet.DataConnectionFactory;
+import com.hzgc.collect.ftp.DataConnectionException;
+import com.hzgc.collect.ftp.ftplet.DataConnectionFactory;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;

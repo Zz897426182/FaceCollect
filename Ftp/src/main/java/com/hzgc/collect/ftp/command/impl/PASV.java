@@ -16,18 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.hzgc.collect.ftp.ftp.command.impl;
+package com.hzgc.collect.ftp.command.impl;
 
-import com.hzgc.collect.ftp.ftp.DataConnectionException;
-import com.hzgc.collect.ftp.ftp.command.AbstractCommand;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpRequest;
-import com.hzgc.collect.ftp.ftp.impl.FtpIoSession;
-import com.hzgc.collect.ftp.ftp.impl.FtpServerContext;
-import com.hzgc.collect.ftp.ftp.impl.LocalizedFtpReply;
-import com.hzgc.collect.ftp.ftp.impl.ServerDataConnectionFactory;
-import com.hzgc.collect.ftp.ftp.util.SocketAddressEncoder;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpReply;
+import com.hzgc.collect.ftp.DataConnectionException;
+import com.hzgc.collect.ftp.command.AbstractCommand;
+import com.hzgc.collect.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.FtpReply;
+import com.hzgc.collect.ftp.ftplet.FtpRequest;
+import com.hzgc.collect.ftp.impl.FtpIoSession;
+import com.hzgc.collect.ftp.impl.FtpServerContext;
+import com.hzgc.collect.ftp.impl.LocalizedFtpReply;
+import com.hzgc.collect.ftp.impl.ServerDataConnectionFactory;
+import com.hzgc.collect.ftp.util.SocketAddressEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ssl;
+package com.hzgc.collect.ftp.ssl;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ftplet;
+package com.hzgc.collect.ftp.ftplet;
 
 /**
  * A ftplet configuration object used by a ftplet container used to pass

@@ -17,13 +17,13 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.DataConnection;
-import com.hzgc.collect.ftp.ftp.util.IOUtils;
-import com.hzgc.collect.ftp.ftp.ftplet.DataType;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpSession;
-import com.hzgc.collect.ftp.ftp.usermanager.impl.TransferRateRequest;
+import com.hzgc.collect.ftp.ftplet.DataConnection;
+import com.hzgc.collect.ftp.ftplet.DataType;
+import com.hzgc.collect.ftp.ftplet.FtpSession;
+import com.hzgc.collect.ftp.usermanager.impl.TransferRateRequest;
+import com.hzgc.collect.ftp.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

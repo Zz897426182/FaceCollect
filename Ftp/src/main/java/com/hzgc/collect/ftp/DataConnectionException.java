@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.FtpException;
 
 /**
  * Thrown if a data connection can not be established

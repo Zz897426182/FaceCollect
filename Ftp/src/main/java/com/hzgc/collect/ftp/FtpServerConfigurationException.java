@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
 /**
  * Exception used during startup to indicate that the configuration is not

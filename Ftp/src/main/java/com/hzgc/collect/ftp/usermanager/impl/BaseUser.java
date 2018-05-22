@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.usermanager.impl;
+package com.hzgc.collect.ftp.usermanager.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.AuthorizationRequest;
-import com.hzgc.collect.ftp.ftp.ftplet.Authority;
-import com.hzgc.collect.ftp.ftp.ftplet.User;
+import com.hzgc.collect.ftp.ftplet.Authority;
+import com.hzgc.collect.ftp.ftplet.AuthorizationRequest;
+import com.hzgc.collect.ftp.ftplet.User;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -16,10 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.*;
-import com.hzgc.collect.ftp.ftp.listener.Listener;
+import com.hzgc.collect.ftp.ftplet.*;
+import com.hzgc.collect.ftp.listener.Listener;
 import org.apache.mina.core.filterchain.IoFilterChain;
 import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ReadFuture;

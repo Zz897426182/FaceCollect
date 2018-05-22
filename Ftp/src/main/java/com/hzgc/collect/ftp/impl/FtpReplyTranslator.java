@@ -17,13 +17,13 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.message.MessageResource;
-import com.hzgc.collect.ftp.ftp.ftplet.FileSystemView;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpRequest;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpStatistics;
-import com.hzgc.collect.ftp.ftp.util.DateUtils;
+import com.hzgc.collect.ftp.ftplet.FileSystemView;
+import com.hzgc.collect.ftp.ftplet.FtpRequest;
+import com.hzgc.collect.ftp.ftplet.FtpStatistics;
+import com.hzgc.collect.ftp.message.MessageResource;
+import com.hzgc.collect.ftp.util.DateUtils;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;

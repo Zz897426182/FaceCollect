@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
-import com.hzgc.collect.ftp.ftp.impl.PassivePorts;
-import com.hzgc.collect.ftp.ftp.impl.DefaultDataConnectionConfiguration;
-import com.hzgc.collect.ftp.ftp.ssl.SslConfiguration;
+import com.hzgc.collect.ftp.impl.DefaultDataConnectionConfiguration;
+import com.hzgc.collect.ftp.impl.PassivePorts;
+import com.hzgc.collect.ftp.ssl.SslConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

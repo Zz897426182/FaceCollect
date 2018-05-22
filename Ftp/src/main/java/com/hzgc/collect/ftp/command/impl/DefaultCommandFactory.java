@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.command.impl;
+package com.hzgc.collect.ftp.command.impl;
 
-import com.hzgc.collect.ftp.ftp.command.Command;
-import com.hzgc.collect.ftp.ftp.command.CommandFactory;
-import com.hzgc.collect.ftp.ftp.command.CommandFactoryFactory;
+import com.hzgc.collect.ftp.command.Command;
+import com.hzgc.collect.ftp.command.CommandFactory;
+import com.hzgc.collect.ftp.command.CommandFactoryFactory;
 
 import java.util.HashMap;
 import java.util.Map;

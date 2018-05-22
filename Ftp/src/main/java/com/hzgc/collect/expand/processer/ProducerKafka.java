@@ -1,6 +1,6 @@
-package com.hzgc.collect.ftp.expand.processer;
+package com.hzgc.collect.expand.processer;
 
-import com.hzgc.collect.ftp.expand.util.CollectProperties;
+import com.hzgc.collect.expand.util.CollectProperties;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -19,8 +19,9 @@ public class ProducerKafka implements Serializable {
     private ProducerKafka() {
         Properties kafkProper = new Properties();
         CollectProperties.getProps().forEach((key, value) -> {
-            if (((String)key).contains("kafka") && !((String)key).contains("topic")) {
-                kafkProper.setProperty((String) key, (String) value);
+            if (((String)key).contains("kafka.") && !((String)key).contains("topic")) {
+                kafkProper.setProperty((String) ((String) key).replace("kafka.", ""),
+                        (String) value);
             }
         });
         kafkaProducer = new KafkaProducer<>(kafkProper);

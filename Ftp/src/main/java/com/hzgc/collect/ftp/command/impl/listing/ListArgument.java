@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.hzgc.collect.ftp.ftp.command.impl.listing;
+package com.hzgc.collect.ftp.command.impl.listing;
 
 /**
  * <strong>Internal class, do not use directly.</strong>

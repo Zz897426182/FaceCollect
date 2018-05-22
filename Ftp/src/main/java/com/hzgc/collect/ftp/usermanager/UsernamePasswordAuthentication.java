@@ -17,10 +17,10 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.usermanager;
+package com.hzgc.collect.ftp.usermanager;
 
-import com.hzgc.collect.ftp.ftp.ftplet.Authentication;
-import com.hzgc.collect.ftp.ftp.usermanager.impl.UserMetadata;
+import com.hzgc.collect.ftp.ftplet.Authentication;
+import com.hzgc.collect.ftp.usermanager.impl.UserMetadata;
 
 /**
  * Class representing a normal authentication attempt using username and

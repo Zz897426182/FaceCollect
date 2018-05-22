@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.message;
+package com.hzgc.collect.ftp.message;
 
-import com.hzgc.collect.ftp.ftp.message.impl.DefaultMessageResource;
+import com.hzgc.collect.ftp.message.impl.DefaultMessageResource;
 
 import java.io.File;
 import java.util.List;

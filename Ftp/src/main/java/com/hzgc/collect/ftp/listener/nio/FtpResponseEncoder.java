@@ -17,9 +17,9 @@
  *  under the License. 
  *  
  */
-package com.hzgc.collect.ftp.ftp.listener.nio;
+package com.hzgc.collect.ftp.listener.nio;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FtpReply;
+import com.hzgc.collect.ftp.ftplet.FtpReply;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoderAdapter;

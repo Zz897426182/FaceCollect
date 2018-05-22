@@ -1,4 +1,4 @@
-package com.hzgc.collect.ftp.expand.util;
+package com.hzgc.collect.expand.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;

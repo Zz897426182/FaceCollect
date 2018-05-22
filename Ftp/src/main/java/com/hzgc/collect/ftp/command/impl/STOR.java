@@ -1,14 +1,11 @@
-package com.hzgc.collect.ftp.ftp.command.impl;
+package com.hzgc.collect.ftp.command.impl;
 
-import com.hzgc.collect.ftp.expand.receiver.Event;
-import com.hzgc.collect.ftp.expand.subscribe.SubscribeInfo;
-import com.hzgc.collect.ftp.expand.util.CollectProperties;
-import com.hzgc.collect.ftp.expand.util.FtpPathMetaData;
-import com.hzgc.collect.ftp.expand.util.ProducerRocketMQ;
-import com.hzgc.collect.ftp.ftp.command.AbstractCommand;
-import com.hzgc.collect.ftp.expand.util.FtpPathParser;
-import com.hzgc.collect.ftp.ftp.ftplet.*;
-import com.hzgc.collect.ftp.ftp.impl.*;
+import com.hzgc.collect.expand.receiver.Event;
+import com.hzgc.collect.zk.subscribe.SubscribeInfo;
+import com.hzgc.collect.expand.util.*;
+import com.hzgc.collect.ftp.command.AbstractCommand;
+import com.hzgc.collect.ftp.ftplet.*;
+import com.hzgc.collect.ftp.impl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
@@ -187,7 +184,7 @@ public class STOR extends AbstractCommand {
         event.setTimeStamp(metaData.getTimeStamp());
         event.setAbsolutePath(file.getFileAbsolutePa());
         event.setFtpHostNameUrlPath(ftpHostNameUrl);
-        event.setFtpIpUrlPaht(ftpIpUrl);
+        event.setFtpIpUrlPath(ftpIpUrl);
         event.setBigPicurl(bigPicHostNameUrl);
         event.setIpcId(metaData.getIpcid());
         event.setDate(metaData.getDate());
@@ -205,7 +202,7 @@ public class STOR extends AbstractCommand {
         event.setTimeStamp(metaData.getTimeStamp());
         event.setAbsolutePath(file.getFileAbsolutePa());
         event.setFtpHostNameUrlPath(ftpHostNameUrl);
-        event.setFtpIpUrlPaht(ftpIpUrl);
+        event.setFtpIpUrlPath(ftpIpUrl);
         event.setBigPicurl(bigPicHostNameUrl);
         event.setIpcId(metaData.getIpcid());
         event.setDate(metaData.getDate());

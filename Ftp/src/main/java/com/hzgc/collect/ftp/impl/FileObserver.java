@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FtpFile;
+import com.hzgc.collect.ftp.ftplet.FtpFile;
 
 /**
  * <strong>Internal class, do not use directly.</strong>

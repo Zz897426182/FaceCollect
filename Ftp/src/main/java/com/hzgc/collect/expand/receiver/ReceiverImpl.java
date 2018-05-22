@@ -1,6 +1,6 @@
-package com.hzgc.collect.ftp.expand.receiver;
+package com.hzgc.collect.expand.receiver;
 
-import com.hzgc.collect.ftp.expand.util.CollectProperties;
+import com.hzgc.collect.expand.util.CollectProperties;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -24,7 +24,7 @@ public class ReceiverImpl implements Receiver, Serializable {
         if (event != null) {
             try {
                 queue.put(event);
-                LOG.info("current queue:" + queueID + ", queue size is:" + getQueue().size());
+                LOG.info("current queue is:" + queueID + ", the size  waiting is th queue is:" + getQueue().size());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

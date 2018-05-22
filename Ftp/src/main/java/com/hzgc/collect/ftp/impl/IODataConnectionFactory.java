@@ -17,14 +17,14 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.DataConnectionConfiguration;
-import com.hzgc.collect.ftp.ftp.DataConnectionException;
-import com.hzgc.collect.ftp.ftp.ftplet.DataConnection;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
-import com.hzgc.collect.ftp.ftp.ssl.ClientAuth;
-import com.hzgc.collect.ftp.ftp.ssl.SslConfiguration;
+import com.hzgc.collect.ftp.DataConnectionConfiguration;
+import com.hzgc.collect.ftp.DataConnectionException;
+import com.hzgc.collect.ftp.ftplet.DataConnection;
+import com.hzgc.collect.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ssl.ClientAuth;
+import com.hzgc.collect.ftp.ssl.SslConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

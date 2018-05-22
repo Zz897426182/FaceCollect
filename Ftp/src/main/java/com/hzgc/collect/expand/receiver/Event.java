@@ -1,11 +1,11 @@
-package com.hzgc.collect.ftp.expand.receiver;
+package com.hzgc.collect.expand.receiver;
 
 public class Event {
      //ftp hostname path(ftp://hostname:port/xx/xx/xx)
     private String ftpHostNameUrlPath;
 
      //ftp ip url path(ftp://ip:port/xx/xx/xx)
-    private String ftpIpUrlPaht;
+    private String ftpIpUrlPath;
 
     // big picture ftp url
     private String bigPicurl;
@@ -64,12 +64,12 @@ public class Event {
         this.ftpHostNameUrlPath = ftpHostNameUrlPath;
     }
 
-    public String getFtpIpUrlPaht() {
-        return ftpIpUrlPaht;
+    public String getFtpIpUrlPath() {
+        return ftpIpUrlPath;
     }
 
-    public void setFtpIpUrlPaht(String ftpIpUrlPaht) {
-        this.ftpIpUrlPaht = ftpIpUrlPaht;
+    public void setFtpIpUrlPath(String ftpIpUrlPath) {
+        this.ftpIpUrlPath = ftpIpUrlPath;
     }
 
     public String getAbsolutePath() {

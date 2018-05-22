@@ -1,7 +1,7 @@
-package com.hzgc.collect.ftp.expand.receiver;
+package com.hzgc.collect.expand.receiver;
 
-import com.hzgc.collect.ftp.expand.processer.ProcessThread;
-import com.hzgc.collect.ftp.expand.util.CollectProperties;
+import com.hzgc.collect.expand.processer.ProcessThread;
+import com.hzgc.collect.expand.util.CollectProperties;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -69,9 +69,8 @@ public class ReceiverScheduler implements Serializable {
      * 取得对应的queueIdList，根据这些queueId去初始化receiver
      */
     public void prepareReceiver() {
-        int receiveNumber = CollectProperties.getReceiveNumber();
-        if (receiveNumber != 0) {
-
+        LOG.info("Initialization receiver, receiver number is " + CollectProperties.getReceiveNumber());
+        if (this.receiveNumber != 0) {
             for (int i = 0; i < this.receiveNumber; i++) {
                 //用来存放工作线程的线程池
                 ExecutorService pool = Executors.newFixedThreadPool(receiveNumber);
@@ -79,7 +78,6 @@ public class ReceiverScheduler implements Serializable {
                 register(receiver);
                 pool.execute(new ProcessThread(receiver.getQueue()));
             }
-            LOG.info("This is the initialization receiver, please wait for the initialization to complete!");
         }
 
     }

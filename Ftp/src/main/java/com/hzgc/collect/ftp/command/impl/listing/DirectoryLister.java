@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.command.impl.listing;
+package com.hzgc.collect.ftp.command.impl.listing;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FileSystemView;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpFile;
+import com.hzgc.collect.ftp.ftplet.FileSystemView;
+import com.hzgc.collect.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.FtpFile;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -16,10 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.hzgc.collect.ftp.ftp.command.impl.listing;
+package com.hzgc.collect.ftp.command.impl.listing;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FtpFile;
-import com.hzgc.collect.ftp.ftp.util.RegularExpr;
+import com.hzgc.collect.ftp.ftplet.FtpFile;
+import com.hzgc.collect.ftp.util.RegularExpr;
 
 /**
  * <strong>Internal class, do not use directly.</strong>

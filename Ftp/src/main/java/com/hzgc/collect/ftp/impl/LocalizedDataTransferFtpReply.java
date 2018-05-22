@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.DataTransferFtpReply;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpFile;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpRequest;
+import com.hzgc.collect.ftp.ftplet.DataTransferFtpReply;
+import com.hzgc.collect.ftp.ftplet.FtpFile;
+import com.hzgc.collect.ftp.ftplet.FtpRequest;
 
 /**
  * An implementation of <code>DataTransferReply</code>.

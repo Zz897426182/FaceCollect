@@ -1,18 +1,18 @@
-package com.hzgc.collect.ftp;
+package com.hzgc.collect;
 
-import com.hzgc.collect.ftp.expand.register.FtpRegister;
-import com.hzgc.collect.ftp.expand.util.FtpLogo;
-import com.hzgc.collect.ftp.ftp.ClusterOverFtp;
-import com.hzgc.collect.ftp.ftp.ConnectionConfigFactory;
-import com.hzgc.collect.ftp.ftp.FtpServer;
-import com.hzgc.collect.ftp.ftp.FtpServerFactory;
-import com.hzgc.collect.ftp.ftp.command.CommandFactoryFactory;
-import com.hzgc.collect.ftp.expand.subscribe.SubscribeWatcher;
-import com.hzgc.collect.ftp.expand.util.CollectProperties;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
-import com.hzgc.collect.ftp.ftp.listener.ListenerFactory;
-import com.hzgc.collect.ftp.ftp.nativefs.filesystem.NativeFileSystemFactory;
-import com.hzgc.collect.ftp.ftp.usermanager.PropertiesUserManagerFactory;
+import com.hzgc.collect.expand.util.FtpLogo;
+import com.hzgc.collect.ftp.ClusterOverFtp;
+import com.hzgc.collect.ftp.ConnectionConfigFactory;
+import com.hzgc.collect.ftp.FtpServer;
+import com.hzgc.collect.ftp.FtpServerFactory;
+import com.hzgc.collect.ftp.command.CommandFactoryFactory;
+import com.hzgc.collect.ftp.nativefs.filesystem.NativeFileSystemFactory;
+import com.hzgc.collect.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.listener.ListenerFactory;
+import com.hzgc.collect.ftp.usermanager.PropertiesUserManagerFactory;
+import com.hzgc.collect.expand.util.CollectProperties;
+import com.hzgc.collect.zk.register.FtpRegister;
+import com.hzgc.collect.zk.subscribe.SubscribeWatcher;
 import com.hzgc.jni.NativeFunction;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -75,7 +75,15 @@ public class FTP extends ClusterOverFtp implements Serializable {
         );
         subscribeWatcher.startSubscribe();
 
-        FtpRegister ftpRegister = new FtpRegister();
+        FtpRegister ftpRegister = new FtpRegister(CollectProperties.getZookeeperAddress(),
+                CollectProperties.getZookeeperSessionTimeout(),
+                CollectProperties.getProxyIpAddress(),
+                CollectProperties.getProxyPort(),
+                CollectProperties.getFtpPathRule(),
+                CollectProperties.getFtpAccount(),
+                CollectProperties.getFtpPassword(),
+                CollectProperties.getHostname(),
+                CollectProperties.getFtpIp());
         ftpRegister.registFtp();
 
         FtpServer server = serverFactory.createServer();

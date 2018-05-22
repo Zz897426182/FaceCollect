@@ -17,10 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
-import com.hzgc.collect.ftp.ftp.impl.DefaultConnectionConfig;
+import com.hzgc.collect.ftp.impl.DefaultConnectionConfig;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 

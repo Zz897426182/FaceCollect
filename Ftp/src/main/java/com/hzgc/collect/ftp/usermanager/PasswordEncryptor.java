@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.usermanager;
+package com.hzgc.collect.ftp.usermanager;
 
 
 /**

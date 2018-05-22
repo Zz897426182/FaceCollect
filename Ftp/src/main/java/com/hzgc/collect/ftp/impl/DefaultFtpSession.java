@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.*;
+import com.hzgc.collect.ftp.ftplet.*;
 
 import java.net.InetSocketAddress;
 import java.security.cert.Certificate;

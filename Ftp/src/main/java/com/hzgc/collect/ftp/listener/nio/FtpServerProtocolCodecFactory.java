@@ -17,7 +17,7 @@
  *  under the License. 
  *  
  */
-package com.hzgc.collect.ftp.ftp.listener.nio;
+package com.hzgc.collect.ftp.listener.nio;
 
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFactory;

@@ -1,4 +1,4 @@
-package com.hzgc.collect.ftp.expand.receiver;
+package com.hzgc.collect.expand.receiver;
 
 import java.util.concurrent.BlockingQueue;
 

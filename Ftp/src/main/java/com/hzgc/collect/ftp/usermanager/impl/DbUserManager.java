@@ -17,15 +17,15 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.usermanager.impl;
+package com.hzgc.collect.ftp.usermanager.impl;
 
-import com.hzgc.collect.ftp.ftp.FtpServerConfigurationException;
-import com.hzgc.collect.ftp.ftp.ftplet.*;
-import com.hzgc.collect.ftp.ftp.usermanager.AnonymousAuthentication;
-import com.hzgc.collect.ftp.ftp.usermanager.DbUserManagerFactory;
-import com.hzgc.collect.ftp.ftp.usermanager.PasswordEncryptor;
-import com.hzgc.collect.ftp.ftp.util.StringUtils;
-import com.hzgc.collect.ftp.ftp.usermanager.UsernamePasswordAuthentication;
+import com.hzgc.collect.ftp.FtpServerConfigurationException;
+import com.hzgc.collect.ftp.ftplet.*;
+import com.hzgc.collect.ftp.usermanager.AnonymousAuthentication;
+import com.hzgc.collect.ftp.usermanager.DbUserManagerFactory;
+import com.hzgc.collect.ftp.usermanager.PasswordEncryptor;
+import com.hzgc.collect.ftp.usermanager.UsernamePasswordAuthentication;
+import com.hzgc.collect.ftp.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

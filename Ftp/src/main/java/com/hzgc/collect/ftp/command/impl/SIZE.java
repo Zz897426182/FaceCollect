@@ -17,16 +17,16 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.command.impl;
+package com.hzgc.collect.ftp.command.impl;
 
-import com.hzgc.collect.ftp.ftp.command.AbstractCommand;
-import com.hzgc.collect.ftp.ftp.impl.FtpServerContext;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpFile;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpReply;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpRequest;
-import com.hzgc.collect.ftp.ftp.impl.FtpIoSession;
-import com.hzgc.collect.ftp.ftp.impl.LocalizedFtpReply;
+import com.hzgc.collect.ftp.command.AbstractCommand;
+import com.hzgc.collect.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.FtpFile;
+import com.hzgc.collect.ftp.ftplet.FtpReply;
+import com.hzgc.collect.ftp.ftplet.FtpRequest;
+import com.hzgc.collect.ftp.impl.FtpIoSession;
+import com.hzgc.collect.ftp.impl.FtpServerContext;
+import com.hzgc.collect.ftp.impl.LocalizedFtpReply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,6 +1,6 @@
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
-import com.hzgc.collect.ftp.expand.util.CollectProperties;
+import com.hzgc.collect.expand.util.CollectProperties;
 
 import java.io.Serializable;
 

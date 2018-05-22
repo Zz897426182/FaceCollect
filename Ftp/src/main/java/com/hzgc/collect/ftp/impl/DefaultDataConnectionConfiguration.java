@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.DataConnectionConfiguration;
-import com.hzgc.collect.ftp.ftp.DataConnectionConfigurationFactory;
-import com.hzgc.collect.ftp.ftp.ssl.SslConfiguration;
+import com.hzgc.collect.ftp.DataConnectionConfiguration;
+import com.hzgc.collect.ftp.DataConnectionConfigurationFactory;
+import com.hzgc.collect.ftp.ssl.SslConfiguration;
 
 /**
  * <strong>Internal class, do not use directly.</strong>

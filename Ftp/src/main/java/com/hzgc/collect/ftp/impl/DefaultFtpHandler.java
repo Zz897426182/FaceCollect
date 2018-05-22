@@ -17,13 +17,13 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.command.Command;
-import com.hzgc.collect.ftp.ftp.command.CommandFactory;
-import com.hzgc.collect.ftp.ftp.ftplet.*;
-import com.hzgc.collect.ftp.ftp.ftpletcontainer.FtpletContainer;
-import com.hzgc.collect.ftp.ftp.listener.Listener;
+import com.hzgc.collect.ftp.command.Command;
+import com.hzgc.collect.ftp.command.CommandFactory;
+import com.hzgc.collect.ftp.ftplet.*;
+import com.hzgc.collect.ftp.ftpletcontainer.FtpletContainer;
+import com.hzgc.collect.ftp.listener.Listener;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.write.WriteToClosedSessionException;
 import org.apache.mina.filter.codec.ProtocolDecoderException;

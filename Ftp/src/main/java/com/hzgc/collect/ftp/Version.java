@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
-import com.hzgc.collect.ftp.ftp.util.IOUtils;
+import com.hzgc.collect.ftp.util.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,7 +41,7 @@ public class Version {
         InputStream in = null;
         
         try {
-            in = Version.class.getClassLoader().getResourceAsStream("com/hzgc/collect/ftp/ftpserver.properties");
+            in = Version.class.getClassLoader().getResourceAsStream("com/hzgc/collect/ftpserver.properties");
             props.load(in);
             return props.getProperty("ftpserver.version");
         } catch (IOException e) {

@@ -17,18 +17,18 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.ftp.ConnectionConfig;
-import com.hzgc.collect.ftp.ftp.FtpServer;
-import com.hzgc.collect.ftp.ftp.FtpServerFactory;
-import com.hzgc.collect.ftp.ftp.command.CommandFactory;
-import com.hzgc.collect.ftp.ftp.ftplet.UserManager;
-import com.hzgc.collect.ftp.ftp.message.MessageResource;
-import com.hzgc.collect.ftp.ftp.ftplet.FileSystemFactory;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
-import com.hzgc.collect.ftp.ftp.ftplet.Ftplet;
-import com.hzgc.collect.ftp.ftp.listener.Listener;
+import com.hzgc.collect.ftp.ConnectionConfig;
+import com.hzgc.collect.ftp.FtpServer;
+import com.hzgc.collect.ftp.FtpServerFactory;
+import com.hzgc.collect.ftp.command.CommandFactory;
+import com.hzgc.collect.ftp.ftplet.FileSystemFactory;
+import com.hzgc.collect.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.Ftplet;
+import com.hzgc.collect.ftp.ftplet.UserManager;
+import com.hzgc.collect.ftp.listener.Listener;
+import com.hzgc.collect.ftp.message.MessageResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

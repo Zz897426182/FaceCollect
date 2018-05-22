@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ftpletcontainer;
+package com.hzgc.collect.ftp.ftpletcontainer;
 
-import com.hzgc.collect.ftp.ftp.ftplet.Ftplet;
+import com.hzgc.collect.ftp.ftplet.Ftplet;
 
 import java.util.Map;
 

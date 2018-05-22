@@ -1,4 +1,4 @@
-package com.hzgc.collect.expand.subscribe;
+package com.hzgc.collect.zk.subscribe;
 
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.*;

@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ssl;
+package com.hzgc.collect.ftp.ssl;
 
-import com.hzgc.collect.ftp.ftp.FtpServerConfigurationException;
-import com.hzgc.collect.ftp.ftp.ssl.impl.DefaultSslConfiguration;
-import com.hzgc.collect.ftp.ftp.util.IOUtils;
+import com.hzgc.collect.ftp.FtpServerConfigurationException;
+import com.hzgc.collect.ftp.ssl.impl.DefaultSslConfiguration;
+import com.hzgc.collect.ftp.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

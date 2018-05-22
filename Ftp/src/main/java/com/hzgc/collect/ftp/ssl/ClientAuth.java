@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ssl;
+package com.hzgc.collect.ftp.ssl;
 
 /**
  * Enumeration of possible levels of client authentication during an SSL

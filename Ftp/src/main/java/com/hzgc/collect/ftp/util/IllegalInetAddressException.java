@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.util;
+package com.hzgc.collect.ftp.util;
 
 /**
  * <strong>Internal class, do not use directly.</strong>

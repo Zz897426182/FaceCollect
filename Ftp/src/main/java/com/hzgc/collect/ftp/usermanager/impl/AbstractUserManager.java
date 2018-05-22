@@ -17,12 +17,12 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.usermanager.impl;
+package com.hzgc.collect.ftp.usermanager.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.UserManager;
-import com.hzgc.collect.ftp.ftp.usermanager.Md5PasswordEncryptor;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
-import com.hzgc.collect.ftp.ftp.usermanager.PasswordEncryptor;
+import com.hzgc.collect.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.UserManager;
+import com.hzgc.collect.ftp.usermanager.Md5PasswordEncryptor;
+import com.hzgc.collect.ftp.usermanager.PasswordEncryptor;
 
 /**
  * <strong>Internal class, do not use directly.</strong>

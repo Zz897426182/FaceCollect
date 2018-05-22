@@ -17,13 +17,13 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.command;
+package com.hzgc.collect.ftp.command;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FtpReply;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpRequest;
-import com.hzgc.collect.ftp.ftp.impl.FtpIoSession;
-import com.hzgc.collect.ftp.ftp.impl.FtpServerContext;
-import com.hzgc.collect.ftp.ftp.impl.LocalizedFtpReply;
+import com.hzgc.collect.ftp.ftplet.FtpReply;
+import com.hzgc.collect.ftp.ftplet.FtpRequest;
+import com.hzgc.collect.ftp.impl.FtpIoSession;
+import com.hzgc.collect.ftp.impl.FtpServerContext;
+import com.hzgc.collect.ftp.impl.LocalizedFtpReply;
 
 import java.io.IOException;
 

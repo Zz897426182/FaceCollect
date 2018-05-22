@@ -17,13 +17,13 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.nativefs.filesystem;
+package com.hzgc.collect.ftp.nativefs.filesystem;
 
-import com.hzgc.collect.ftp.ftp.ftplet.User;
-import com.hzgc.collect.ftp.ftp.nativefs.filesystem.impl.NativeFileSystemView;
-import com.hzgc.collect.ftp.ftp.ftplet.FileSystemFactory;
-import com.hzgc.collect.ftp.ftp.ftplet.FileSystemView;
-import com.hzgc.collect.ftp.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.FileSystemFactory;
+import com.hzgc.collect.ftp.ftplet.FileSystemView;
+import com.hzgc.collect.ftp.ftplet.FtpException;
+import com.hzgc.collect.ftp.ftplet.User;
+import com.hzgc.collect.ftp.nativefs.filesystem.impl.NativeFileSystemView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

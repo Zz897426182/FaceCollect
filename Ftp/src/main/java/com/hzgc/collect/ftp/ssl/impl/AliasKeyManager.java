@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ssl.impl;
+package com.hzgc.collect.ftp.ssl.impl;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.X509KeyManager;

@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.command;
+package com.hzgc.collect.ftp.command;
 
-import com.hzgc.collect.ftp.ftp.command.impl.*;
+import com.hzgc.collect.ftp.command.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;

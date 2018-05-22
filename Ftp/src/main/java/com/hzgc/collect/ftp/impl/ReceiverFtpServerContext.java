@@ -1,6 +1,6 @@
-package com.hzgc.collect.ftp.ftp.impl;
+package com.hzgc.collect.ftp.impl;
 
-import com.hzgc.collect.ftp.expand.receiver.ReceiverScheduler;
+import com.hzgc.collect.expand.receiver.ReceiverScheduler;
 
 public class ReceiverFtpServerContext extends DefaultFtpServerContext {
     private ReceiverScheduler scheduler;

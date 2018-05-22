@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ipfilter;
+package com.hzgc.collect.ftp.ipfilter;
 
 /**
  * Defines various types of IP Filters.

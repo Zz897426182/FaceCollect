@@ -17,10 +17,10 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.ftpletcontainer.impl;
+package com.hzgc.collect.ftp.ftpletcontainer.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.*;
-import com.hzgc.collect.ftp.ftp.ftpletcontainer.FtpletContainer;
+import com.hzgc.collect.ftp.ftplet.*;
+import com.hzgc.collect.ftp.ftpletcontainer.FtpletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

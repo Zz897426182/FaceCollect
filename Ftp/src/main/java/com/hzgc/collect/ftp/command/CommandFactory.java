@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.command;
+package com.hzgc.collect.ftp.command;
 
 /**
  * Command factory interface.

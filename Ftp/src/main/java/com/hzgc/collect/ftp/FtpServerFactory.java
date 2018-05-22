@@ -17,18 +17,18 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp;
+package com.hzgc.collect.ftp;
 
-import com.hzgc.collect.ftp.ftp.command.CommandFactory;
-import com.hzgc.collect.ftp.ftp.ftplet.UserManager;
-import com.hzgc.collect.ftp.ftp.ftpletcontainer.impl.DefaultFtpletContainer;
-import com.hzgc.collect.ftp.ftp.impl.DefaultFtpServerContext;
-import com.hzgc.collect.ftp.ftp.impl.ReceiverFtpServerContext;
-import com.hzgc.collect.ftp.ftp.message.MessageResource;
-import com.hzgc.collect.ftp.ftp.ftplet.FileSystemFactory;
-import com.hzgc.collect.ftp.ftp.ftplet.Ftplet;
-import com.hzgc.collect.ftp.ftp.impl.DefaultFtpServer;
-import com.hzgc.collect.ftp.ftp.listener.Listener;
+import com.hzgc.collect.ftp.command.CommandFactory;
+import com.hzgc.collect.ftp.ftplet.FileSystemFactory;
+import com.hzgc.collect.ftp.ftplet.Ftplet;
+import com.hzgc.collect.ftp.ftplet.UserManager;
+import com.hzgc.collect.ftp.ftpletcontainer.impl.DefaultFtpletContainer;
+import com.hzgc.collect.ftp.impl.DefaultFtpServer;
+import com.hzgc.collect.ftp.impl.DefaultFtpServerContext;
+import com.hzgc.collect.ftp.impl.ReceiverFtpServerContext;
+import com.hzgc.collect.ftp.listener.Listener;
+import com.hzgc.collect.ftp.message.MessageResource;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -17,20 +17,20 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.listener.nio;
+package com.hzgc.collect.ftp.listener.nio;
 
-import com.hzgc.collect.ftp.ftp.DataConnectionConfiguration;
-import com.hzgc.collect.ftp.ftp.FtpServerConfigurationException;
-import com.hzgc.collect.ftp.ftp.impl.DefaultFtpHandler;
-import com.hzgc.collect.ftp.ftp.impl.FtpHandler;
-import com.hzgc.collect.ftp.ftp.impl.FtpIoSession;
-import com.hzgc.collect.ftp.ftp.impl.FtpServerContext;
-import com.hzgc.collect.ftp.ftp.ipfilter.MinaSessionFilter;
-import com.hzgc.collect.ftp.ftp.ipfilter.SessionFilter;
-import com.hzgc.collect.ftp.ftp.listener.Listener;
-import com.hzgc.collect.ftp.ftp.listener.ListenerFactory;
-import com.hzgc.collect.ftp.ftp.ssl.ClientAuth;
-import com.hzgc.collect.ftp.ftp.ssl.SslConfiguration;
+import com.hzgc.collect.ftp.DataConnectionConfiguration;
+import com.hzgc.collect.ftp.FtpServerConfigurationException;
+import com.hzgc.collect.ftp.impl.DefaultFtpHandler;
+import com.hzgc.collect.ftp.impl.FtpHandler;
+import com.hzgc.collect.ftp.impl.FtpIoSession;
+import com.hzgc.collect.ftp.impl.FtpServerContext;
+import com.hzgc.collect.ftp.ipfilter.MinaSessionFilter;
+import com.hzgc.collect.ftp.ipfilter.SessionFilter;
+import com.hzgc.collect.ftp.listener.Listener;
+import com.hzgc.collect.ftp.listener.ListenerFactory;
+import com.hzgc.collect.ftp.ssl.ClientAuth;
+import com.hzgc.collect.ftp.ssl.SslConfiguration;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;

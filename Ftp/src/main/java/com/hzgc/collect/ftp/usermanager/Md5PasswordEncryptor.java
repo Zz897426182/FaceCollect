@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.usermanager;
+package com.hzgc.collect.ftp.usermanager;
 
-import com.hzgc.collect.ftp.ftp.util.EncryptUtils;
+import com.hzgc.collect.ftp.util.EncryptUtils;
 
 
 /**

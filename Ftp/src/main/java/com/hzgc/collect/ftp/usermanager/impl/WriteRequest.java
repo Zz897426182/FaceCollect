@@ -17,9 +17,9 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.usermanager.impl;
+package com.hzgc.collect.ftp.usermanager.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.AuthorizationRequest;
+import com.hzgc.collect.ftp.ftplet.AuthorizationRequest;
 
 /**
  * <strong>Internal class, do not use directly.</strong>

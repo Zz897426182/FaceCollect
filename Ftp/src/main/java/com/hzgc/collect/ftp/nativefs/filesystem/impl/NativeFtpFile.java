@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package com.hzgc.collect.ftp.ftp.nativefs.filesystem.impl;
+package com.hzgc.collect.ftp.nativefs.filesystem.impl;
 
-import com.hzgc.collect.ftp.ftp.ftplet.FtpFile;
-import com.hzgc.collect.ftp.ftp.ftplet.User;
-import com.hzgc.collect.ftp.ftp.usermanager.impl.WriteRequest;
+import com.hzgc.collect.ftp.ftplet.FtpFile;
+import com.hzgc.collect.ftp.ftplet.User;
+import com.hzgc.collect.ftp.usermanager.impl.WriteRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

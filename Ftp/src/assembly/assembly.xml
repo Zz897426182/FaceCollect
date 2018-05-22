@@ -10,21 +10,21 @@
         <fileSet>
             <directory>${project.basedir}/bin</directory>
             <fileMode>0755</fileMode>
-            <outputDirectory>RealTimeFaceCompare/ftp/bin</outputDirectory>
+            <outputDirectory>bin</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/src/main/resources</directory>
+            <directory>src/main/resources</directory>
             <includes>
                 <include>*.properties</include>
             </includes>
-            <outputDirectory>RealTimeFaceCompare/ftp/conf</outputDirectory>
+            <outputDirectory>conf</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>${project.basedir}/target</directory>
             <includes>
                 <include>*.jar</include>
             </includes>
-            <outputDirectory>RealTimeFaceCompare/ftp/lib</outputDirectory>
+            <outputDirectory>lib</outputDirectory>
         </fileSet>
     </fileSets>
     <dependencySets>
@@ -34,7 +34,7 @@
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <!--是否解压 -->
             <unpack>false</unpack>
-            <outputDirectory>RealTimeFaceCompare/ftp/lib</outputDirectory>
+            <outputDirectory>lib</outputDirectory>
         </dependencySet>
     </dependencySets>
 </assembly>
