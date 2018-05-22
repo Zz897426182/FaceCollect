@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+    <id>FaceCollect</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <formats>
+        <format>dir</format>
+        <format>tar.gz</format>
+    </formats>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/bin</directory>
+            <fileMode>0755</fileMode>
+            <outputDirectory>RealTimeFaceCompare/ftp/bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <includes>
+                <include>*.properties</include>
+            </includes>
+            <outputDirectory>RealTimeFaceCompare/ftp/conf</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/target</directory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <outputDirectory>RealTimeFaceCompare/ftp/lib</outputDirectory>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <!--把间接依赖的jar 也包含进来 -->
+            <useTransitiveDependencies>true</useTransitiveDependencies>
+            <!--是否解压 -->
+            <unpack>false</unpack>
+            <outputDirectory>RealTimeFaceCompare/ftp/lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+</assembly>
