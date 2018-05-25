@@ -27,7 +27,7 @@ LIB_JARS=${LIB_JARS}
 
 if [ -n "${FTP_PNAME}" ];then
     PNAME_COUNT=`ps -ef | grep ${FTP_PNAME} | wc -l`
-    if [ ${PNAME_COUNT} -gt 0 ];then
+    if [ ${PNAME_COUNT} -gt 1 ];then
         echo "ftp process name ${FTP_PNAME} alread exists, stop ftpserver first"
         exit 1
     fi

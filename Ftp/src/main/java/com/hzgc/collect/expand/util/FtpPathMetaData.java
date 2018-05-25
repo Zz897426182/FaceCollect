@@ -7,7 +7,7 @@ public class FtpPathMetaData implements Serializable {
     private String ipcid;
     private String timeStamp;
     private String date;
-    private String timeslot;
+    private int timeslot;
 
     public String getIpcid() {
         return ipcid;
@@ -33,11 +33,11 @@ public class FtpPathMetaData implements Serializable {
         this.date = date;
     }
 
-    public String getTimeslot() {
+    public int getTimeslot() {
         return timeslot;
     }
 
-    void setTimeslot(String timeslot) {
+    public void setTimeslot(int timeslot) {
         this.timeslot = timeslot;
     }
 }

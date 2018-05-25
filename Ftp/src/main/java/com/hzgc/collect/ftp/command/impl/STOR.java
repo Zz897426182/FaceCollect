@@ -188,6 +188,7 @@ public class STOR extends AbstractCommand {
         event.setBigPicurl(bigPicHostNameUrl);
         event.setIpcId(metaData.getIpcid());
         event.setDate(metaData.getDate());
+        event.setTimeSlot(metaData.getTimeslot());
         //发送到rocketMQ
         ProducerRocketMQ.getInstance().send(metaData.getIpcid(), metaData.getTimeStamp(), ftpIpUrl.getBytes());
         context.getScheduler().putData(event);

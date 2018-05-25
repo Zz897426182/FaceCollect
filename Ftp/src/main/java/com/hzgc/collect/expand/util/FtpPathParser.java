@@ -51,7 +51,7 @@ public class FtpPathParser {
             message.setIpcid(ipcID);
             message.setTimeStamp(time.toString());
             message.setDate(date.toString());
-            message.setTimeslot(sj.toString());
+            message.setTimeslot(Integer.parseInt(sj.toString()));
         } catch (Exception e) {
             e.printStackTrace();
         }

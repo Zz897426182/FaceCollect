@@ -22,13 +22,13 @@ public class Event {
     //this picture date
     private String date;
 
-    private String timeSlot;
+    private int timeSlot;
 
-    public String getTimeSlot() {
+    public int getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(String timeSlot) {
+    public void setTimeSlot(int timeSlot) {
         this.timeSlot = timeSlot;
     }
 

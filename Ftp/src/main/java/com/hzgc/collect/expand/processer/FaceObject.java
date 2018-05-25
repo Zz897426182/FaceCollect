@@ -15,17 +15,16 @@ public class FaceObject implements Serializable {
     //时间戳（格式：2017-01-01 00：00：00）
     private String timeStamp;
 
-    //文件类型(区分人/车)
-    private SearchType type;
-
     //日期（格式：2017-01-01）
     private String date;
 
     //时间段（格式：0000）(小时+分钟)
-    private String timeSlot;
+    private int timeSlot;
 
     //人脸属性对象
     private FaceAttribute attribute;
+
+    private String startTime;
 
     private String surl;
 
@@ -33,21 +32,13 @@ public class FaceObject implements Serializable {
 
     private String hostname;
 
-    public FaceObject(String ipcId,
-                      String timeStamp,
-                      SearchType type,
-                      String date,
-                      String timeSlot,
-                      FaceAttribute attribute,
-                      String surl,
-                      String burl,
-                      String hostname) {
+    public FaceObject(String ipcId, String timeStamp, String date, int timeSlot, FaceAttribute attribute, String startTime, String surl, String burl, String hostname) {
         this.ipcId = ipcId;
         this.timeStamp = timeStamp;
-        this.type = type;
         this.date = date;
         this.timeSlot = timeSlot;
         this.attribute = attribute;
+        this.startTime = startTime;
         this.surl = surl;
         this.burl = burl;
         this.hostname = hostname;
@@ -69,14 +60,6 @@ public class FaceObject implements Serializable {
         this.timeStamp = timeStamp;
     }
 
-    public SearchType getType() {
-        return type;
-    }
-
-    public void setType(SearchType type) {
-        this.type = type;
-    }
-
     public String getDate() {
         return date;
     }
@@ -85,11 +68,11 @@ public class FaceObject implements Serializable {
         this.date = date;
     }
 
-    public String getTimeSlot() {
+    public int getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(String timeSlot) {
+    public void setTimeSlot(int timeSlot) {
         this.timeSlot = timeSlot;
     }
 
@@ -99,6 +82,14 @@ public class FaceObject implements Serializable {
 
     public void setAttribute(FaceAttribute attribute) {
         this.attribute = attribute;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getSurl() {
@@ -124,18 +115,4 @@ public class FaceObject implements Serializable {
     public void setHostname(String hostname) {
         this.hostname = hostname;
     }
-}
-
-/**
- * 搜索类型，搜人或者搜车
- */
-enum SearchType implements Serializable {
-    /**
-     * 搜索类型为人
-     */
-    PERSON,
-    /**
-     * 搜索类型为车
-     */
-    CAR
 }
