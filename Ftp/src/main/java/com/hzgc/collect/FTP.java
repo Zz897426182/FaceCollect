@@ -24,10 +24,6 @@ public class FTP extends ClusterOverFtp implements Serializable {
 
     private static Logger LOG = Logger.getLogger(FTP.class);
 
-    static {
-        System.out.println(FtpLogo.getLogo());
-    }
-
     @Override
     public void startFtpServer() {
 
@@ -103,5 +99,6 @@ public class FTP extends ClusterOverFtp implements Serializable {
         FTP ftp = new FTP();
         ftp.loadConfig();
         ftp.startFtpServer();
+        LOG.info("\n" + FtpLogo.getLogo());
     }
 }

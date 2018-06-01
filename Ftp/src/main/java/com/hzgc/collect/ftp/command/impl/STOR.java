@@ -8,6 +8,7 @@ import com.hzgc.collect.ftp.ftplet.*;
 import com.hzgc.collect.ftp.impl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -137,26 +138,18 @@ public class STOR extends AbstractCommand {
                 }
                 //此处获取到的路径是图片上传路径即/ipcid/xx/xx,不是文件系统的绝对路径
                 fileName = file.getAbsolutePath();
-
-                if (fileName.contains("unknown")) {
-                    LOG.error(fileName + ":contain unknown ipcID, Not send to rocketMQ and Kafka!");
-                } else {
-                    //0为大图,大于1为小图
-                    int faceNum = FtpPathParser.pcikSmallPicture(fileName);
-                    if (fileName.contains(".jpg") && faceNum > 0) {
-
-                        FtpPathMetaData metaData = FtpPathParser.getFtpPathMetaData(fileName);
-                        if (CollectProperties.isFtpSubscribeSwitch()) {
-                            if (SubscribeInfo.getIpcList().isEmpty()) {
-                                if (SubscribeInfo.getIpcList().contains(metaData.getIpcid())) {
-                                    sendMQAndReceive(file, metaData, context);
-                                }
-                            } else {
-                                onlyReceive(file, metaData, context);
+                FtpPathMetaData metaData = FtpPathParse.parse(fileName);
+                if (metaData != null) {
+                    if (CollectProperties.isFtpSubscribeSwitch()) {
+                        if (SubscribeInfo.getIpcList().isEmpty()) {
+                            if (SubscribeInfo.getIpcList().contains(metaData.getIpcid())) {
+                                sendMQAndReceive(file, metaData, context);
                             }
                         } else {
-                            sendMQAndReceive(file, metaData, context);
+                            onlyReceive(file, metaData, context);
                         }
+                    } else {
+                        sendMQAndReceive(file, metaData, context);
                     }
                 }
             }
@@ -166,21 +159,22 @@ public class STOR extends AbstractCommand {
                 session.write(LocalizedDataTransferFtpReply.translate(session, request, context,
                         FtpReply.REPLY_226_CLOSING_DATA_CONNECTION, "STOR",
                         fileName, file, transSz));
-
             }
         } finally {
             session.resetState();
             session.getDataConnection().closeDataConnection();
         }
+
     }
 
     private void sendMQAndReceive(FtpFile file, FtpPathMetaData metaData, FtpServerContext context) {
         //拼装ftpUrl (ftp://hostname/)
-        String ftpHostNameUrl = FtpPathParser.ftpPath2HostNamepath(file.getAbsolutePath());
-        String bigPicHostNameUrl = FtpPathParser.surlToBurl(ftpHostNameUrl);
+        String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());
+        String bigPicHostNameUrl = FtpPathParse.surlToBurl(ftpHostNameUrl);
         //获取ftpUrl (ftp://ip/)
-        String ftpIpUrl = FtpPathParser.hostNameUrl2IpUrl(ftpHostNameUrl);
+        String ftpIpUrl = FtpPathParse.hostNameUrl2IpUrl(ftpHostNameUrl);
         Event event = new Event();
+        event.setRelativePath(file.getAbsolutePath());
         event.setTimeStamp(metaData.getTimeStamp());
         event.setAbsolutePath(file.getFileAbsolutePa());
         event.setFtpHostNameUrlPath(ftpHostNameUrl);
@@ -196,10 +190,11 @@ public class STOR extends AbstractCommand {
 
     private void onlyReceive(FtpFile file, FtpPathMetaData metaData, FtpServerContext context) {
         //拼装ftpUrl (ftp://hostname/)
-        String ftpHostNameUrl = FtpPathParser.ftpPath2HostNamepath(file.getAbsolutePath());
-        String bigPicHostNameUrl = FtpPathParser.surlToBurl(ftpHostNameUrl);
-        String ftpIpUrl = FtpPathParser.hostNameUrl2IpUrl(ftpHostNameUrl);
+        String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());
+        String bigPicHostNameUrl = FtpPathParse.surlToBurl(ftpHostNameUrl);
+        String ftpIpUrl = FtpPathParse.hostNameUrl2IpUrl(ftpHostNameUrl);
         Event event = new Event();
+        event.setRelativePath(file.getAbsolutePath());
         event.setTimeStamp(metaData.getTimeStamp());
         event.setAbsolutePath(file.getFileAbsolutePa());
         event.setFtpHostNameUrlPath(ftpHostNameUrl);

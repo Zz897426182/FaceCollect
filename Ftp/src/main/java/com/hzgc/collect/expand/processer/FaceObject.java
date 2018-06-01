@@ -30,89 +30,102 @@ public class FaceObject implements Serializable {
 
     private String burl;
 
+    private String relativePath;
+
+
     private String hostname;
 
-    public FaceObject(String ipcId, String timeStamp, String date, int timeSlot, FaceAttribute attribute, String startTime, String surl, String burl, String hostname) {
-        this.ipcId = ipcId;
-        this.timeStamp = timeStamp;
-        this.date = date;
-        this.timeSlot = timeSlot;
-        this.attribute = attribute;
-        this.startTime = startTime;
-        this.surl = surl;
-        this.burl = burl;
-        this.hostname = hostname;
+    public String getRelativePath() {
+        return relativePath;
+    }
+
+    public FaceObject setRelativePath(String relativePath) {
+        this.relativePath = relativePath;
+        return this;
+    }
+
+    public static FaceObject builder() {
+        return new FaceObject();
     }
 
     public String getIpcId() {
         return ipcId;
     }
 
-    public void setIpcId(String ipcId) {
+    public FaceObject setIpcId(String ipcId) {
         this.ipcId = ipcId;
+        return this;
     }
 
     public String getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public FaceObject setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
+        return this;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public FaceObject setDate(String date) {
         this.date = date;
+        return this;
     }
 
     public int getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(int timeSlot) {
+    public FaceObject setTimeSlot(int timeSlot) {
         this.timeSlot = timeSlot;
+        return this;
     }
 
     public FaceAttribute getAttribute() {
         return attribute;
     }
 
-    public void setAttribute(FaceAttribute attribute) {
+    public FaceObject setAttribute(FaceAttribute attribute) {
         this.attribute = attribute;
+        return this;
     }
 
     public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public FaceObject setStartTime(String startTime) {
         this.startTime = startTime;
+        return this;
     }
 
     public String getSurl() {
         return surl;
     }
 
-    public void setSurl(String surl) {
+    public FaceObject setSurl(String surl) {
         this.surl = surl;
+        return this;
     }
 
     public String getBurl() {
         return burl;
     }
 
-    public void setBurl(String burl) {
+    public FaceObject setBurl(String burl) {
         this.burl = burl;
+        return this;
     }
 
     public String getHostname() {
         return hostname;
     }
 
-    public void setHostname(String hostname) {
+    public FaceObject setHostname(String hostname) {
         this.hostname = hostname;
+        return this;
     }
 }

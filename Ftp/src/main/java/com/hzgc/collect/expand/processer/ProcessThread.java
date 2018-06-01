@@ -27,19 +27,21 @@ public class ProcessThread implements Runnable {
                 FaceAttribute attribute =
                         FaceFunction.featureExtract(event.getAbsolutePath());
                 if (attribute.getFeature() != null) {
-                    FaceObject faceObject = new FaceObject(event.getIpcId(),
-                            event.getTimeStamp(),
-                            event.getDate(),
-                            event.getTimeSlot(),
-                            attribute,
-                            dateFormat.format(System.currentTimeMillis()),
-                            event.getFtpHostNameUrlPath(),
-                            event.getBigPicurl(),
-                            CollectProperties.getHostname());
+                    FaceObject faceObject = FaceObject.builder()
+                            .setIpcId(event.getIpcId())
+                            .setTimeStamp(event.getTimeStamp())
+                            .setDate(event.getDate())
+                            .setTimeSlot(event.getTimeSlot())
+                            .setAttribute(attribute)
+                            .setStartTime(dateFormat.format(System.currentTimeMillis()))
+                            .setSurl(event.getFtpHostNameUrlPath())
+                            .setBurl(event.getBigPicurl())
+                            .setHostname(CollectProperties.getHostname())
+                            .setRelativePath(event.getRelativePath());
                     ProcessCallBack callBack = new ProcessCallBack(event.getFtpIpUrlPath(),
                             dateFormat.format(System.currentTimeMillis()));
                     String jsonObject = JsonUtil.toJson(faceObject);
-                    LOG.debug("Thread name [" + Thread.currentThread() +"] process event " + JsonUtil.toJson(event));
+                    LOG.debug("Thread name [" + Thread.currentThread() + "] process event " + JsonUtil.toJson(event));
                     ProducerKafka.getInstance().sendKafkaMessage(
                             CollectProperties.getKafkaFaceObjectTopic(),
                             event.getFtpHostNameUrlPath(),
