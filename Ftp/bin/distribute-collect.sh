@@ -19,7 +19,7 @@ COLLECT_DIR=`pwd`                                    ##collect模块部署目录
 COLLECT_CONF_DIR=$COLLECT_DIR/conf                   ##collect模块conf目录
 COLLECT_PRO_FILE=$COLLECT_CONF_DIR/collect.properties  ##collect的properties配置文件
 
-COLLECT_LOG_DIR=$COLLECT_DIR/log                      ##collect的log目录
+COLLECT_LOG_DIR=$COLLECT_DIR/logs                      ##collect的log目录
 LOG_FILE=$COLLECT_LOG_DIR/collect.log
 
 #创建日志目录
