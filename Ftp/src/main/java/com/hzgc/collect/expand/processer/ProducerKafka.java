@@ -20,7 +20,7 @@ public class ProducerKafka implements Serializable {
         Properties kafkProper = new Properties();
         CollectProperties.getProps().forEach((key, value) -> {
             if (((String)key).contains("kafka.") && !((String)key).contains("topic")) {
-                kafkProper.setProperty((String) ((String) key).replace("kafka.", ""),
+                kafkProper.setProperty(((String) key).replace("kafka.", ""),
                         (String) value);
             }
         });

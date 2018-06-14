@@ -8,10 +8,10 @@ public class ProcessCallBack implements Callback {
 
     private static Logger LOG = Logger.getLogger(ProcessCallBack.class);
 
-    private long elapsedTime;
+    private String  elapsedTime;
     private String key;
 
-    ProcessCallBack(String key, long time) {
+    ProcessCallBack(String key, String time) {
         this.key = key;
         this.elapsedTime = time;
     }

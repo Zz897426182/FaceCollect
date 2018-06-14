@@ -1,6 +1,8 @@
 package com.hzgc.collect;
 
+import com.hzgc.collect.expand.processer.ProducerKafka;
 import com.hzgc.collect.expand.util.FtpLogo;
+import com.hzgc.collect.expand.util.ProducerRocketMQ;
 import com.hzgc.collect.ftp.ClusterOverFtp;
 import com.hzgc.collect.ftp.ConnectionConfigFactory;
 import com.hzgc.collect.ftp.FtpServer;
@@ -23,10 +25,6 @@ import java.io.Serializable;
 public class FTP extends ClusterOverFtp implements Serializable {
 
     private static Logger LOG = Logger.getLogger(FTP.class);
-
-    static {
-        System.out.println(FtpLogo.getLogo());
-    }
 
     @Override
     public void startFtpServer() {
@@ -64,16 +62,27 @@ public class FTP extends ClusterOverFtp implements Serializable {
         LOG.info("FTP Server Maximum logon number:" + connectionConfigFactory.createUDConnectionConfig().getMaxLogins());
         serverFactory.setConnectionConfig(connectionConfigFactory.createUDConnectionConfig());
         LOG.info("Set user defined connection config file is successful, " + connectionConfigFactory.getClass());
-        //Set the dynamic log configuration file refresh time
+
+        //定时刷新本地日志配置文件log4j.properties
         PropertyConfigurator.configureAndWatch(
                 ClassLoader.getSystemResource("log4j.properties").getPath(), 5000);
         LOG.info("Dynamic log configuration is successful! Log configuration file refresh time 5000ms");
 
-        SubscribeWatcher subscribeWatcher = new SubscribeWatcher(CollectProperties.getZookeeperSessionTimeout(),
-                CollectProperties.getZookeeperAddress(),
-                CollectProperties.getZookeeperSubscribePath()
-        );
-        subscribeWatcher.startSubscribe();
+        //初始化ProducerKafka
+        ProducerKafka.getInstance();
+
+        //初始化ProducerRocketMQ
+        ProducerRocketMQ.getInstance();
+
+        /* 暂时停止抓拍订阅功能
+         SubscribeWatcher subscribeWatcher = new SubscribeWatcher(CollectProperties.getZookeeperSessionTimeout(),
+         CollectProperties.getZookeeperAddress(),
+         CollectProperties.getZookeeperSubscribePath()
+         );
+
+         subscribeWatcher.startSubscribe();
+         *
+         */
 
         FtpRegister ftpRegister = new FtpRegister(CollectProperties.getZookeeperAddress(),
                 CollectProperties.getZookeeperSessionTimeout(),
@@ -103,5 +112,6 @@ public class FTP extends ClusterOverFtp implements Serializable {
         FTP ftp = new FTP();
         ftp.loadConfig();
         ftp.startFtpServer();
+        LOG.info("\n" + FtpLogo.getLogo());
     }
 }
