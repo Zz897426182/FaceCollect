@@ -24,8 +24,8 @@ public class BoxParser implements Parser {
      */
     @Override
     public FtpPathMetaData parse(String path) {
+        FtpPathMetaData message = new FtpPathMetaData();
         if (canParse(path)) {
-            FtpPathMetaData message = new FtpPathMetaData();
             String ipcID = path.substring(1, path.indexOf("/", 1));
             String timeStr = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf("_")).replace("_", "");
 
@@ -39,7 +39,6 @@ public class BoxParser implements Parser {
             StringBuilder time = new StringBuilder();
             time = time.append(year).append("-").append(month).append("-").append(day).
                     append(" ").append(hour).append(":").append(minute).append(":").append(second);
-            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             StringBuilder date = new StringBuilder();
             date = date.append(year).append("-").append(month).append("-").append(day);
@@ -47,19 +46,11 @@ public class BoxParser implements Parser {
             StringBuilder sj = new StringBuilder();
             sj = sj.append(hour).append(minute);
 
-            try {
-            /*Date date = sdf.parse(time.toString());
-            long timeStamp = date.getTime();*/
-                message.setIpcid(ipcID);
-                message.setTimeStamp(time.toString());
-                message.setDate(date.toString());
-                message.setTimeslot(Integer.parseInt(sj.toString()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return message;
-        } else {
-            return null;
+            message.setIpcid(ipcID);
+            message.setTimeStamp(time.toString());
+            message.setDate(date.toString());
+            message.setTimeslot(Integer.parseInt(sj.toString()));
         }
+        return message;
     }
 }

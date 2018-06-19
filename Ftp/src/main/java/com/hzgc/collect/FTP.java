@@ -75,8 +75,7 @@ public class FTP extends ClusterOverFtp implements Serializable {
         ProducerRocketMQ.getInstance();
 
         // 在Zookeeper中创建抓拍订阅跟路径
-        SubscribeRegister subscribeRegister = new SubscribeRegister(CollectProperties.getZookeeperAddress(),
-                SubscribeRegister.ROOT_PATH);
+        SubscribeRegister subscribeRegister = new SubscribeRegister(CollectProperties.getZookeeperAddress());
         subscribeRegister.createRootPath();
 
 
