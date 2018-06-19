@@ -99,13 +99,21 @@ public class FTP extends ClusterOverFtp implements Serializable {
         }
     }
 
-    public static void main(String args[]) throws Exception {
+    private void detector() {
         int detectorNum = CollectProperties.getFaceDetectorNumber();
         LOG.info("Init face detector, number is " + detectorNum);
-        for (int i = 0; i < detectorNum; i++) {
+        if (detectorNum == 0) {
             NativeFunction.init();
+        }else {
+            for (int i = 0; i < detectorNum; i++) {
+                NativeFunction.init();
+            }
         }
+    }
+
+    public static void main(String args[]) throws Exception {
         FTP ftp = new FTP();
+        ftp.detector();
         ftp.loadConfig();
         ftp.startFtpServer();
         LOG.info("\n" + FtpLogo.getLogo());
