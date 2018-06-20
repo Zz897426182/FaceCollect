@@ -14,7 +14,7 @@ import com.hzgc.collect.ftp.listener.ListenerFactory;
 import com.hzgc.collect.ftp.usermanager.PropertiesUserManagerFactory;
 import com.hzgc.collect.expand.util.CollectProperties;
 import com.hzgc.collect.zk.register.FtpRegister;
-import com.hzgc.collect.zk.subscribe.SubscribeWatcher;
+import com.hzgc.collect.zk.subscribe.SubscribeRegister;
 import com.hzgc.jni.NativeFunction;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -74,18 +74,13 @@ public class FTP extends ClusterOverFtp implements Serializable {
         //初始化ProducerRocketMQ
         ProducerRocketMQ.getInstance();
 
-        /* 暂时停止抓拍订阅功能
-         SubscribeWatcher subscribeWatcher = new SubscribeWatcher(CollectProperties.getZookeeperSessionTimeout(),
-         CollectProperties.getZookeeperAddress(),
-         CollectProperties.getZookeeperSubscribePath()
-         );
+        // 在Zookeeper中创建抓拍订阅跟路径
+        SubscribeRegister subscribeRegister = new SubscribeRegister(CollectProperties.getZookeeperAddress());
+        subscribeRegister.createRootPath();
 
-         subscribeWatcher.startSubscribe();
-         *
-         */
 
         FtpRegister ftpRegister = new FtpRegister(CollectProperties.getZookeeperAddress(),
-                CollectProperties.getZookeeperSessionTimeout(),
+                6000,
                 CollectProperties.getProxyIpAddress(),
                 CollectProperties.getProxyPort(),
                 CollectProperties.getFtpPathRule(),
@@ -103,13 +98,21 @@ public class FTP extends ClusterOverFtp implements Serializable {
         }
     }
 
-    public static void main(String args[]) throws Exception {
+    private void detector() {
         int detectorNum = CollectProperties.getFaceDetectorNumber();
         LOG.info("Init face detector, number is " + detectorNum);
-        for (int i = 0; i < detectorNum; i++) {
+        if (detectorNum == 0) {
             NativeFunction.init();
+        }else {
+            for (int i = 0; i < detectorNum; i++) {
+                NativeFunction.init();
+            }
         }
+    }
+
+    public static void main(String args[]) throws Exception {
         FTP ftp = new FTP();
+        ftp.detector();
         ftp.loadConfig();
         ftp.startFtpServer();
         LOG.info("\n" + FtpLogo.getLogo());

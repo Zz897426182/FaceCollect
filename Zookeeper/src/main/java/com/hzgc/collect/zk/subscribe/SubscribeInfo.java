@@ -1,15 +1,17 @@
 package com.hzgc.collect.zk.subscribe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SubscribeInfo {
     private static SubscribeInfo instance;
-    private static List<String> ipcList;
+    private static Map<String, List<String>> sessionMap;
     private static final Object[] lock = new Object[0];
 
     public SubscribeInfo() {
-        ipcList = new ArrayList<>();
+        sessionMap = new HashMap<>();
     }
 
     public static SubscribeInfo getInstance() {
@@ -21,13 +23,28 @@ public class SubscribeInfo {
         return instance;
     }
 
-    public static void flushIpcList(List<String> newIpcList) {
+    public static void flushSessionMap(Map<String, List<String>> newSessionMap) {
         synchronized (lock) {
-            ipcList = newIpcList;
+            sessionMap = newSessionMap;
         }
     }
 
-    public static List<String> getIpcList() {
-        return ipcList;
+    public static Map<String, List<String>> getSessionMap() {
+        Map<String, List<String>> ipcMappingUser = new HashMap<>();
+        sessionMap.keySet().forEach(sessionId -> {
+            List<String> ipcList = sessionMap.get(sessionId);
+            for (String ipc: ipcList) {
+                if (!ipcMappingUser.containsKey(ipc)) {
+                    List<String> userList = new ArrayList<>();
+                    userList.add(sessionId);
+                    ipcMappingUser.put(ipc, userList);
+                } else {
+                    List<String> userList = ipcMappingUser.get(ipc);
+                    userList.add(sessionId);
+                    ipcMappingUser.put(ipc, userList);
+                }
+            }
+        });
+        return ipcMappingUser;
     }
 }

@@ -19,9 +19,7 @@ public class CollectProperties implements Serializable {
     private static int ftpPort;
     private static String dataPorts;
     private static String ftpImplicitSsl;
-    private static int zookeeperSessionTimeout;
     private static String zookeeperAddress;
-    private static String zookeeperSubscribePath;
     private static boolean ftpSubscribeSwitch;
     private static String kafkaFaceObjectTopic;
     private static String rocketmqAddress;
@@ -62,9 +60,7 @@ public class CollectProperties implements Serializable {
             setFtpPort(Integer.parseInt(props.getProperty("ftp.port")));
             setDataPorts(props.getProperty("data.ports"));
             setFtpImplicitSsl(props.getProperty("ftp.implicitSsl"));
-            setZookeeperSessionTimeout(Integer.parseInt(props.getProperty("zookeeper.session.timeout")));
             setZookeeperAddress(props.getProperty("zookeeper.address"));
-            setZookeeperSubscribePath(props.getProperty("zookeeper.subscribe.path"));
             setFtpSubscribeSwitch(Boolean.parseBoolean(props.getProperty("ftp.subscribe.switch")));
             setKafkaFaceObjectTopic(props.getProperty("kafka.faceobject.topic"));
             setRocketmqAddress(props.getProperty("rocketmq.address"));
@@ -123,14 +119,6 @@ public class CollectProperties implements Serializable {
 
     public static void setFtpSubscribeSwitch(boolean ftpSubscribeSwitch) {
         CollectProperties.ftpSubscribeSwitch = ftpSubscribeSwitch;
-    }
-
-    public static int getZookeeperSessionTimeout() {
-        return zookeeperSessionTimeout;
-    }
-
-    public static void setZookeeperSessionTimeout(int zookeeperSessionTimeout) {
-        CollectProperties.zookeeperSessionTimeout = zookeeperSessionTimeout;
     }
 
     public static void setProps(Properties props) {
@@ -215,14 +203,6 @@ public class CollectProperties implements Serializable {
 
     private static void setZookeeperAddress(String zookeeperAddress) {
         CollectProperties.zookeeperAddress = zookeeperAddress;
-    }
-
-    public static String getZookeeperSubscribePath() {
-        return zookeeperSubscribePath;
-    }
-
-    private static void setZookeeperSubscribePath(String zookeeperSubscribePath) {
-        CollectProperties.zookeeperSubscribePath = zookeeperSubscribePath;
     }
 
     public static String getKafkaFaceObjectTopic() {

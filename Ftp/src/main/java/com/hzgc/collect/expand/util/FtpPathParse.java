@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class FtpPathParse {
     private static BoxParser boxParser = new BoxParser();
+    private static DaHuaParser daHuaParser = new DaHuaParser();
 
     public static FtpPathMetaData parse(String fileName) {
         return boxParser.parse(fileName);
