@@ -13,6 +13,9 @@ public class Event {
      //face absolute path (file:///xx/xx/xx)
     private String absolutePath;
 
+    //ftp relative path (/ipc/xx/xx/xx)
+    private String relativePath;
+
     //picture timestamp
     private String timeStamp;
 
@@ -23,6 +26,14 @@ public class Event {
     private String date;
 
     private int timeSlot;
+
+    public String getRelativePath() {
+        return relativePath;
+    }
+
+    public void setRelativePath(String relativePath) {
+        this.relativePath = relativePath;
+    }
 
     public int getTimeSlot() {
         return timeSlot;

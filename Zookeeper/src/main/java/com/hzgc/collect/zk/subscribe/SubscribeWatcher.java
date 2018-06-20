@@ -6,9 +6,7 @@ import org.apache.zookeeper.data.Stat;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SubscribeWatcher implements Serializable, Watcher {
     private static Logger LOG = Logger.getLogger(SubscribeWatcher.class);
@@ -26,43 +24,49 @@ public class SubscribeWatcher implements Serializable, Watcher {
         }
     }
 
-    public void startSubscribe() {
-        createPath();
-        getData();
-    }
-
+    // 当节点变动更新设备列表
     private void getData() {
         List<String> childList;
         if (pathExists()) {
             childList = getChild();
         } else {
-            createPath();
+            createRootPath();
             childList = getChild();
         }
-
         if (childList != null) {
+            Map<String, List<String>> sessionMap = new HashMap<>();
             for (String child : childList) {
                 String path = rootPath + "/" + child;
+                byte[] data = null;
                 try {
-                    byte[] data = zkClient.getData(path, true, null);
-                    if (data != null) {
-                        String ipcIds = new String(data);
-                        if (!ipcIds.equals("") && ipcIds.contains(",") && ipcIds.split(",").length >= 3) {
-                            ipcIds = ipcIds.substring(0, ipcIds.length() - 1);
-                            List<String> list = Arrays.asList(ipcIds.split(","));
-                            List<String> ipcIdList = new ArrayList<>();
-                            for (int i = 2; i < list.size(); i++) {
-                                ipcIdList.add(list.get(i));
-                            }
-                            SubscribeInfo.flushIpcList(ipcIdList);
-                        }
-                    }
+                    data = zkClient.getData(path, true, null);
                 } catch (KeeperException | InterruptedException e) {
                     e.printStackTrace();
                 }
+                List<String> ipcIdList = new ArrayList<>();
+                if (data != null) {
+                    String ipcIds = new String(data);
+                    if (!ipcIds.equals("") && ipcIds.contains(",") && ipcIds.split(",").length >= 3) {
+                        ipcIds = ipcIds.substring(0, ipcIds.length() - 1);
+                        List<String> list = Arrays.asList(ipcIds.split(","));
+                        for (int i = 2; i < list.size(); i++) {
+                            ipcIdList.add(list.get(i));
+                        }
+                    }
+                }
+                sessionMap.put(child, ipcIdList);
             }
+            SubscribeInfo.flushSessionMap(sessionMap);
         }
     }
+
+    /*private boolean isInDate(String time) {
+        Calendar now = Calendar.getInstance();
+        now.add(Calendar.MONTH, -6);
+        long endTime =  now.getTimeInMillis();
+        long startTime = Long.parseLong(time);
+        return startTime <= endTime;
+    }*/
 
     private List<String> getChild() {
         List<String> childList;
@@ -79,7 +83,7 @@ public class SubscribeWatcher implements Serializable, Watcher {
         return null;
     }
 
-    private void createPath() {
+    private void createRootPath() {
         boolean pathExists = pathExists();
         if (!pathExists) {
             try {

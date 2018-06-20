@@ -25,6 +25,12 @@ FTP_PNAME=`sed '/ftp.process.name/!d;s/.*=//' ${CONF_DIR}/collect.properties | t
 LIB_JARS=`ls $LIB_DIR|grep .jar|awk '{print "'$LIB_DIR'/"$0}'|tr "\n" ":"`    ## jar 包位置以及第三方依赖jar包，绝对路径
 LIB_JARS=${LIB_JARS}
 
+FTPDATA=`sed '/com.hzgc.ftpserver.user.admin.homedirectory/!d;s/.*=//' ${CONF_DIR}/users.properties | tr -d '\r'`
+
+if [ ! -d ${FTPDATA} ]; then
+    mkdir ${FTPDATA}
+fi
+
 if [ -n "${FTP_PNAME}" ];then
     PNAME_COUNT=`ps -ef | grep ${FTP_PNAME} | wc -l`
     if [ ${PNAME_COUNT} -gt 1 ];then

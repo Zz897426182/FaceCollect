@@ -1,6 +1,8 @@
 package com.hzgc.collect;
 
+import com.hzgc.collect.expand.processer.ProducerKafka;
 import com.hzgc.collect.expand.util.FtpLogo;
+import com.hzgc.collect.expand.util.ProducerRocketMQ;
 import com.hzgc.collect.ftp.ClusterOverFtp;
 import com.hzgc.collect.ftp.ConnectionConfigFactory;
 import com.hzgc.collect.ftp.FtpServer;
@@ -12,7 +14,7 @@ import com.hzgc.collect.ftp.listener.ListenerFactory;
 import com.hzgc.collect.ftp.usermanager.PropertiesUserManagerFactory;
 import com.hzgc.collect.expand.util.CollectProperties;
 import com.hzgc.collect.zk.register.FtpRegister;
-import com.hzgc.collect.zk.subscribe.SubscribeWatcher;
+import com.hzgc.collect.zk.subscribe.SubscribeRegister;
 import com.hzgc.jni.NativeFunction;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -23,10 +25,6 @@ import java.io.Serializable;
 public class FTP extends ClusterOverFtp implements Serializable {
 
     private static Logger LOG = Logger.getLogger(FTP.class);
-
-    static {
-        System.out.println(FtpLogo.getLogo());
-    }
 
     @Override
     public void startFtpServer() {
@@ -64,19 +62,25 @@ public class FTP extends ClusterOverFtp implements Serializable {
         LOG.info("FTP Server Maximum logon number:" + connectionConfigFactory.createUDConnectionConfig().getMaxLogins());
         serverFactory.setConnectionConfig(connectionConfigFactory.createUDConnectionConfig());
         LOG.info("Set user defined connection config file is successful, " + connectionConfigFactory.getClass());
-        //Set the dynamic log configuration file refresh time
+
+        //定时刷新本地日志配置文件log4j.properties
         PropertyConfigurator.configureAndWatch(
                 ClassLoader.getSystemResource("log4j.properties").getPath(), 5000);
         LOG.info("Dynamic log configuration is successful! Log configuration file refresh time 5000ms");
 
-        SubscribeWatcher subscribeWatcher = new SubscribeWatcher(CollectProperties.getZookeeperSessionTimeout(),
-                CollectProperties.getZookeeperAddress(),
-                CollectProperties.getZookeeperSubscribePath()
-        );
-        subscribeWatcher.startSubscribe();
+        //初始化ProducerKafka
+        ProducerKafka.getInstance();
+
+        //初始化ProducerRocketMQ
+        ProducerRocketMQ.getInstance();
+
+        // 在Zookeeper中创建抓拍订阅跟路径
+        SubscribeRegister subscribeRegister = new SubscribeRegister(CollectProperties.getZookeeperAddress());
+        subscribeRegister.createRootPath();
+
 
         FtpRegister ftpRegister = new FtpRegister(CollectProperties.getZookeeperAddress(),
-                CollectProperties.getZookeeperSessionTimeout(),
+                6000,
                 CollectProperties.getProxyIpAddress(),
                 CollectProperties.getProxyPort(),
                 CollectProperties.getFtpPathRule(),
@@ -94,14 +98,23 @@ public class FTP extends ClusterOverFtp implements Serializable {
         }
     }
 
-    public static void main(String args[]) throws Exception {
+    private void detector() {
         int detectorNum = CollectProperties.getFaceDetectorNumber();
         LOG.info("Init face detector, number is " + detectorNum);
-        for (int i = 0; i < detectorNum; i++) {
+        if (detectorNum == 0) {
             NativeFunction.init();
+        }else {
+            for (int i = 0; i < detectorNum; i++) {
+                NativeFunction.init();
+            }
         }
+    }
+
+    public static void main(String args[]) throws Exception {
         FTP ftp = new FTP();
+        ftp.detector();
         ftp.loadConfig();
         ftp.startFtpServer();
+        LOG.info("\n" + FtpLogo.getLogo());
     }
 }
