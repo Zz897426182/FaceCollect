@@ -14,7 +14,6 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.List;
-import java.util.Map;
 
 public class STOR extends AbstractCommand {
     private final Logger LOG = LoggerFactory.getLogger(STOR.class);
@@ -141,18 +140,20 @@ public class STOR extends AbstractCommand {
                 //此处获取到的路径是图片上传路径即/ipcid/xx/xx,不是文件系统的绝对路径
                 fileName = file.getAbsolutePath();
                 FtpPathMetaData metaData = FtpPathParse.parse(fileName);
-                if (metaData != null) {
-                    if (CollectProperties.isFtpSubscribeSwitch()) {
-                        // 获取ZK中抓拍订阅信息
-                        if (!SubscribeInfo.getSessionMap().isEmpty()) {
-                            if (SubscribeInfo.getSessionMap().containsKey(metaData.getIpcid())) {
-                                sendMQAndReceive(file, metaData, context, SubscribeInfo.getSessionMap().get(metaData.getIpcid()));
+                if (fileName.contains(".jpg")) {
+                    if (metaData != null) {
+                        if (CollectProperties.isFtpSubscribeSwitch()) {
+                            // 获取ZK中抓拍订阅信息
+                            if (!SubscribeInfo.getSessionMap().isEmpty()) {
+                                if (SubscribeInfo.getSessionMap().containsKey(metaData.getIpcid())) {
+                                    sendMQAndReceive(file, metaData, context, SubscribeInfo.getSessionMap().get(metaData.getIpcid()));
+                                }
+                            } else {
+                                onlyReceive(file, metaData, context);
                             }
                         } else {
-                            onlyReceive(file, metaData, context);
+                            sendMQAndReceive(file, metaData, context);
                         }
-                    } else {
-                        sendMQAndReceive(file, metaData, context);
                     }
                 }
             }

@@ -2,6 +2,7 @@ package com.hzgc.collect.expand.receiver;
 
 import com.hzgc.collect.expand.processer.ProcessThread;
 import com.hzgc.collect.expand.util.CollectProperties;
+import com.hzgc.collect.expand.util.JsonUtil;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -38,6 +39,7 @@ public class ReceiverScheduler implements Serializable {
      */
     public void putData(final Event event) {
         synchronized (container) {
+            LOG.debug("Thread name [" + Thread.currentThread() + "] process event " + JsonUtil.toJson(event));
             getReceiver().putData(event);
         }
     }
