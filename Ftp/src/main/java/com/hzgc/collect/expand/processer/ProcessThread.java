@@ -41,7 +41,6 @@ public class ProcessThread implements Runnable {
                     ProcessCallBack callBack = new ProcessCallBack(event.getFtpIpUrlPath(),
                             dateFormat.format(System.currentTimeMillis()));
                     String jsonObject = JsonUtil.toJson(faceObject);
-                    LOG.debug("Thread name [" + Thread.currentThread() + "] process event " + JsonUtil.toJson(event));
                     ProducerKafka.getInstance().sendKafkaMessage(
                             CollectProperties.getKafkaFaceObjectTopic(),
                             event.getFtpHostNameUrlPath(),
