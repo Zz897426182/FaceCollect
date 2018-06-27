@@ -14,7 +14,6 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.List;
-import java.util.Map;
 
 public class STOR extends AbstractCommand {
     private final Logger LOG = LoggerFactory.getLogger(STOR.class);
@@ -190,6 +189,7 @@ public class STOR extends AbstractCommand {
         ProducerRocketMQ.getInstance().send(metaData.getIpcid(), metaData.getTimeStamp(), ftpIpUrl.getBytes());
         context.getScheduler().putData(event);
     }
+
     private void sendMQAndReceive(FtpFile file, FtpPathMetaData metaData, FtpServerContext context, List<String> sessionIds) {
         //拼装ftpUrl (ftp://hostname/)
         String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());

@@ -109,6 +109,6 @@ public class SubscribeWatcher implements Serializable, Watcher {
     @Override
     public void process(WatchedEvent event) {
         getData();
-        System.out.println(event);
+        LOG.info("WatchedEvent state:" + event);
     }
 }
