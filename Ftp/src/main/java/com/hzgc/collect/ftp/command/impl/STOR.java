@@ -137,21 +137,27 @@ public class STOR extends AbstractCommand {
                 if (outStream != null) {
                     outStream.close();
                 }
-                //此处获取到的路径是图片上传路径即/ipcid/xx/xx,不是文件系统的绝对路径
+                //此处获取到的路径是图片上传路径,不是文件系统的绝对路径
                 fileName = file.getAbsolutePath();
-                FtpPathMetaData metaData = FtpPathParse.parse(fileName);
-                if (metaData != null) {
-                    if (CollectProperties.isFtpSubscribeSwitch()) {
-                        // 获取ZK中抓拍订阅信息
-                        if (!SubscribeInfo.getSessionMap().isEmpty()) {
-                            if (SubscribeInfo.getSessionMap().containsKey(metaData.getIpcid())) {
-                                sendMQAndReceive(file, metaData, context, SubscribeInfo.getSessionMap().get(metaData.getIpcid()));
+                // 判断当前上传路径是否需要解析
+                boolean isParser = FtpPathParse.isParse(fileName);
+                if(isParser){
+                    // 解析上传路径
+                    FtpPathMetaData metaData = FtpPathParse.parse(fileName);
+                    if (metaData != null) {
+                        // FTP抓拍订阅功能实现
+                        if (CollectProperties.isFtpSubscribeSwitch()) {
+                            // 获取ZK中抓拍订阅信息
+                            if (!SubscribeInfo.getSessionMap().isEmpty()) {
+                                if (SubscribeInfo.getSessionMap().containsKey(metaData.getIpcid())) {
+                                    sendMQAndReceive(file, metaData, context, SubscribeInfo.getSessionMap().get(metaData.getIpcid()));
+                                }
+                            } else {
+                                onlyReceive(file, metaData, context);
                             }
                         } else {
-                            onlyReceive(file, metaData, context);
+                            sendMQAndReceive(file, metaData, context);
                         }
-                    } else {
-                        sendMQAndReceive(file, metaData, context);
                     }
                 }
             }
