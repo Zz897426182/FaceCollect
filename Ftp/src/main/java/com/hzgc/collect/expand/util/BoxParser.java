@@ -9,7 +9,7 @@ public class BoxParser implements Parser {
      */
     @Override
     public boolean canParse(String path) {
-        if (path.contains("unknown")) {
+        if (path.contains("unknown") || !path.contains(".jpg")) {
             return false;
         }
         String tmpStr = path.substring(path.lastIndexOf("_") + 1, path.lastIndexOf("."));
@@ -24,8 +24,8 @@ public class BoxParser implements Parser {
      */
     @Override
     public FtpPathMetaData parse(String path) {
-        FtpPathMetaData message = new FtpPathMetaData();
         if (canParse(path)) {
+            FtpPathMetaData message = new FtpPathMetaData();
             String ipcID = path.substring(1, path.indexOf("/", 1));
             String timeStr = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf("_")).replace("_", "");
 
@@ -50,7 +50,8 @@ public class BoxParser implements Parser {
             message.setTimeStamp(time.toString());
             message.setDate(date.toString());
             message.setTimeslot(Integer.parseInt(sj.toString()));
+            return message;
         }
-        return message;
+        return null;
     }
 }

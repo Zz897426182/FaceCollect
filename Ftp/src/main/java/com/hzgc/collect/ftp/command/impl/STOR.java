@@ -140,20 +140,18 @@ public class STOR extends AbstractCommand {
                 //此处获取到的路径是图片上传路径即/ipcid/xx/xx,不是文件系统的绝对路径
                 fileName = file.getAbsolutePath();
                 FtpPathMetaData metaData = FtpPathParse.parse(fileName);
-                if (fileName.contains(".jpg")) {
-                    if (metaData != null) {
-                        if (CollectProperties.isFtpSubscribeSwitch()) {
-                            // 获取ZK中抓拍订阅信息
-                            if (!SubscribeInfo.getSessionMap().isEmpty()) {
-                                if (SubscribeInfo.getSessionMap().containsKey(metaData.getIpcid())) {
-                                    sendMQAndReceive(file, metaData, context, SubscribeInfo.getSessionMap().get(metaData.getIpcid()));
-                                }
-                            } else {
-                                onlyReceive(file, metaData, context);
+                if (metaData != null) {
+                    if (CollectProperties.isFtpSubscribeSwitch()) {
+                        // 获取ZK中抓拍订阅信息
+                        if (!SubscribeInfo.getSessionMap().isEmpty()) {
+                            if (SubscribeInfo.getSessionMap().containsKey(metaData.getIpcid())) {
+                                sendMQAndReceive(file, metaData, context, SubscribeInfo.getSessionMap().get(metaData.getIpcid()));
                             }
                         } else {
-                            sendMQAndReceive(file, metaData, context);
+                            onlyReceive(file, metaData, context);
                         }
+                    } else {
+                        sendMQAndReceive(file, metaData, context);
                     }
                 }
             }
@@ -191,6 +189,7 @@ public class STOR extends AbstractCommand {
         ProducerRocketMQ.getInstance().send(metaData.getIpcid(), metaData.getTimeStamp(), ftpIpUrl.getBytes());
         context.getScheduler().putData(event);
     }
+
     private void sendMQAndReceive(FtpFile file, FtpPathMetaData metaData, FtpServerContext context, List<String> sessionIds) {
         //拼装ftpUrl (ftp://hostname/)
         String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());
