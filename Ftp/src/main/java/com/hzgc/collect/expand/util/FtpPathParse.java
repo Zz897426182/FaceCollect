@@ -3,11 +3,23 @@ package com.hzgc.collect.expand.util;
 import org.apache.commons.lang3.StringUtils;
 
 public class FtpPathParse {
-    private static BoxParser boxParser = new BoxParser();
-    private static DaHuaParser daHuaParser = new DaHuaParser();
+    private static Parser boxParser = new BoxParser();
+    private static Parser daHuaParser = new DaHuaParser();
+
+    public static boolean isParse(String fileName){
+        if (fileName.contains("dahua")){
+            return daHuaParser.canParse(fileName);
+        }else {
+            return boxParser.canParse(fileName);
+        }
+    }
 
     public static FtpPathMetaData parse(String fileName) {
-        return boxParser.parse(fileName);
+        if (fileName.contains("dahua")){
+            return daHuaParser.parse(fileName);
+        }else {
+            return boxParser.parse(fileName);
+        }
     }
 
     /**
