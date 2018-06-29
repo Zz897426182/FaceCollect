@@ -3,7 +3,7 @@ package com.hzgc.collect.expand.util;
 public class DaHuaParser implements Parser {
     @Override
     public boolean canParse(String path) {
-        if (path.contains("unknown")) {
+        if (path.contains("unknown") || !path.contains(".jpg")) {
             return false;
         }
         String tmpStr = path.substring(path.lastIndexOf("[") + 1, path.lastIndexOf("]"));
@@ -23,7 +23,7 @@ public class DaHuaParser implements Parser {
             String day = dateStr.substring(6, 8);
             String hour = path.split("/")[6];
             String minute = path.split("/")[7];
-            String second = path.split("/")[8].substring(0,1);
+            String second = path.split("/")[8].substring(0,2);
 
             StringBuilder time = new StringBuilder();
             time = time.append(year).append("-").append(month).append("-").append(day).
