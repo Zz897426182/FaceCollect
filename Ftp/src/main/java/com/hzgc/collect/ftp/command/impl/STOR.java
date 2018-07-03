@@ -5,7 +5,9 @@ import com.hzgc.collect.expand.util.*;
 import com.hzgc.collect.ftp.command.AbstractCommand;
 import com.hzgc.collect.ftp.ftplet.*;
 import com.hzgc.collect.ftp.impl.*;
-import com.hzgc.collect.zk.subscribe.SubscribeInfo;
+import com.hzgc.common.collect.facesub.SubscribeInfo;
+import com.hzgc.common.rocketmq.RocketMQProducer;
+import com.hzgc.common.util.json.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -192,7 +194,9 @@ public class STOR extends AbstractCommand {
         event.setDate(metaData.getDate());
         event.setTimeSlot(metaData.getTimeslot());
         //发送到rocketMQ
-        ProducerRocketMQ.getInstance().send(metaData.getIpcid(), metaData.getTimeStamp(), ftpIpUrl.getBytes());
+        RocketMQProducer.getInstance(CollectProperties.getRocketmqAddress(),
+                CollectProperties.getRocketmqCaptureTopic(),
+                CollectProperties.getRokcetmqCaptureGroup()).send(metaData.getIpcid(), metaData.getTimeStamp(), ftpIpUrl.getBytes());
         context.getScheduler().putData(event);
     }
 
@@ -216,7 +220,9 @@ public class STOR extends AbstractCommand {
         SendMqMessage mqMessage = new SendMqMessage();
         mqMessage.setSessionIds(sessionIds);
         mqMessage.setFtpUrl(ftpIpUrl);
-        ProducerRocketMQ.getInstance().send(metaData.getIpcid(), metaData.getTimeStamp(), JsonUtil.toJson(mqMessage).getBytes());
+        RocketMQProducer.getInstance(CollectProperties.getRocketmqAddress(),
+                CollectProperties.getRocketmqCaptureTopic(),
+                CollectProperties.getRokcetmqCaptureGroup()).send(metaData.getIpcid(), metaData.getTimeStamp(), JSONUtil.toJson(mqMessage).getBytes());
         context.getScheduler().putData(event);
     }
 

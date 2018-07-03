@@ -2,9 +2,10 @@ package com.hzgc.collect.expand.processer;
 
 import com.hzgc.collect.expand.receiver.Event;
 import com.hzgc.collect.expand.util.CollectProperties;
-import com.hzgc.collect.expand.util.JsonUtil;
-import com.hzgc.jni.FaceAttribute;
-import com.hzgc.jni.FaceFunction;
+import com.hzgc.common.collect.bean.FaceObject;
+import com.hzgc.common.jni.FaceAttribute;
+import com.hzgc.common.jni.FaceFunction;
+import com.hzgc.common.util.json.JSONUtil;
 import org.apache.log4j.Logger;
 
 import java.text.SimpleDateFormat;
@@ -40,7 +41,7 @@ public class ProcessThread implements Runnable {
                             .setRelativePath(event.getRelativePath());
                     ProcessCallBack callBack = new ProcessCallBack(event.getFtpIpUrlPath(),
                             dateFormat.format(System.currentTimeMillis()));
-                    String jsonObject = JsonUtil.toJson(faceObject);
+                    String jsonObject = JSONUtil.toJson(faceObject);
                     ProducerKafka.getInstance().sendKafkaMessage(
                             CollectProperties.getKafkaFaceObjectTopic(),
                             event.getFtpHostNameUrlPath(),
