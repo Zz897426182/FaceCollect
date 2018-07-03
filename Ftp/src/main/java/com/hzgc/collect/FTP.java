@@ -12,7 +12,7 @@ import com.hzgc.collect.ftp.ftplet.FtpException;
 import com.hzgc.collect.ftp.listener.ListenerFactory;
 import com.hzgc.collect.ftp.usermanager.PropertiesUserManagerFactory;
 import com.hzgc.collect.expand.util.CollectProperties;
-import com.hzgc.collect.zk.register.FtpRegister;
+import com.hzgc.common.collect.facedis.FtpRegister;
 import com.hzgc.common.collect.facesub.SubscribeRegister;
 import com.hzgc.common.jni.NativeFunction;
 import com.hzgc.common.rocketmq.RocketMQProducer;
