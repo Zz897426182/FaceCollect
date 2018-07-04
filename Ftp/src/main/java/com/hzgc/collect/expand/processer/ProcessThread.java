@@ -37,7 +37,7 @@ public class ProcessThread implements Runnable {
                 byte[] bytes = FileUtil.fileToByteArray(event.getAbsolutePath());
                 BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
                 if (image.getWidth() * image.getHeight() >= 1920 * 1080) {
-                    LOG.error("Camera error, This is a big picture");
+                    LOG.error("Camera error, This is a big picture, fileName: " + event.getAbsolutePath());
                     continue;
                 }
                 if (CollectProperties.isFtpSubscribeSwitch()) {
