@@ -2,13 +2,22 @@ package com.hzgc.collect.expand.processer;
 
 import com.hzgc.collect.expand.receiver.Event;
 import com.hzgc.collect.expand.util.CollectProperties;
+import com.hzgc.collect.expand.util.SendMqMessage;
 import com.hzgc.common.collect.bean.FaceObject;
-import com.hzgc.common.jni.FaceAttribute;
-import com.hzgc.common.jni.FaceFunction;
+import com.hzgc.common.collect.facesub.SubscribeInfo;
+import com.hzgc.common.rocketmq.RocketMQProducer;
+import com.hzgc.common.util.file.FileUtil;
 import com.hzgc.common.util.json.JSONUtil;
+import com.hzgc.jni.FaceAttribute;
+import com.hzgc.jni.FaceFunction;
 import org.apache.log4j.Logger;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 public class ProcessThread implements Runnable {
@@ -25,8 +34,22 @@ public class ProcessThread implements Runnable {
         Event event;
         try {
             while ((event = queue.take()) != null) {
-                FaceAttribute attribute =
-                        FaceFunction.featureExtract(event.getAbsolutePath());
+                byte[] bytes = FileUtil.fileToByteArray(event.getAbsolutePath());
+                BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
+                if (image.getWidth() * image.getHeight() >= 1920 * 1080) {
+                    continue;
+                }
+                if (CollectProperties.isFtpSubscribeSwitch()) {
+                    if (!SubscribeInfo.getSessionMap().isEmpty()) {
+                        if (SubscribeInfo.getSessionMap().containsKey(event.getIpcId())) {
+                            List<String> sessionIds = SubscribeInfo.getSessionMap().get(event.getIpcId());
+                            sendMQ(event, sessionIds);
+                        }
+                    }
+                } else {
+                    sendMQ(event);
+                }
+                FaceAttribute attribute = FaceFunction.featureExtract(bytes);
                 if (attribute.getFeature() != null) {
                     FaceObject faceObject = FaceObject.builder()
                             .setIpcId(event.getIpcId())
@@ -47,10 +70,30 @@ public class ProcessThread implements Runnable {
                             event.getFtpHostNameUrlPath(),
                             jsonObject,
                             callBack);
+                }else {
+                    LOG.info("FaceAttribute values are not extracted, fileName: " + event.getAbsolutePath());
                 }
             }
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void sendMQ(Event event) {
+        RocketMQProducer.getInstance(CollectProperties.getRocketmqAddress(),
+                CollectProperties.getRocketmqCaptureTopic(),
+                CollectProperties.getRokcetmqCaptureGroup())
+                .send(event.getIpcId(), event.getTimeStamp(), event.getFtpIpUrlPath().getBytes());
+    }
+
+    private void sendMQ(Event event, List<String> sessionIds) {
+        SendMqMessage mqMessage = new SendMqMessage();
+        mqMessage.setSessionIds(sessionIds);
+        mqMessage.setFtpUrl(event.getFtpIpUrlPath());
+        RocketMQProducer.getInstance(
+                CollectProperties.getRocketmqAddress(),
+                CollectProperties.getRocketmqCaptureTopic(),
+                CollectProperties.getRokcetmqCaptureGroup())
+                .send(event.getIpcId(), event.getTimeStamp(), JSONUtil.toJson(mqMessage).getBytes());
     }
 }

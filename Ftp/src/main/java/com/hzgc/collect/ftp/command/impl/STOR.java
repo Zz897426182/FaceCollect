@@ -141,25 +141,29 @@ public class STOR extends AbstractCommand {
                 }
                 //此处获取到的路径是图片上传路径,不是文件系统的绝对路径
                 fileName = file.getAbsolutePath();
+                LOG.info(fileName + "    " + file.getSize()/1000 + "KB");
                 // 判断当前上传路径是否需要解析
                 boolean isParser = FtpPathParse.isParse(fileName);
-                if(isParser){
+                if (isParser) {
                     // 解析上传路径
                     FtpPathMetaData metaData = FtpPathParse.parse(fileName);
                     if (metaData != null) {
-                        // FTP抓拍订阅功能实现
-                        if (CollectProperties.isFtpSubscribeSwitch()) {
-                            // 获取ZK中抓拍订阅信息
-                            if (!SubscribeInfo.getSessionMap().isEmpty()) {
-                                if (SubscribeInfo.getSessionMap().containsKey(metaData.getIpcid())) {
-                                    sendMQAndReceive(file, metaData, context, SubscribeInfo.getSessionMap().get(metaData.getIpcid()));
-                                }
-                            } else {
-                                onlyReceive(file, metaData, context);
-                            }
-                        } else {
-                            sendMQAndReceive(file, metaData, context);
-                        }
+                        //拼装ftpUrl (ftp://hostname/)
+                        String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());
+                        String bigPicHostNameUrl = FtpPathParse.surlToBurl(ftpHostNameUrl);
+                        //获取ftpUrl (ftp://ip/)
+                        String ftpIpUrl = FtpPathParse.hostNameUrl2IpUrl(ftpHostNameUrl);
+                        Event event = new Event();
+                        event.setRelativePath(file.getAbsolutePath());
+                        event.setTimeStamp(metaData.getTimeStamp());
+                        event.setAbsolutePath(file.getFileAbsolutePa());
+                        event.setFtpHostNameUrlPath(ftpHostNameUrl);
+                        event.setFtpIpUrlPath(ftpIpUrl);
+                        event.setBigPicurl(bigPicHostNameUrl);
+                        event.setIpcId(metaData.getIpcid());
+                        event.setDate(metaData.getDate());
+                        event.setTimeSlot(metaData.getTimeslot());
+                        context.getScheduler().putData(event);
                     }
                 }
             }
@@ -175,72 +179,5 @@ public class STOR extends AbstractCommand {
             session.getDataConnection().closeDataConnection();
         }
 
-    }
-
-    private void sendMQAndReceive(FtpFile file, FtpPathMetaData metaData, FtpServerContext context) {
-        //拼装ftpUrl (ftp://hostname/)
-        String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());
-        String bigPicHostNameUrl = FtpPathParse.surlToBurl(ftpHostNameUrl);
-        //获取ftpUrl (ftp://ip/)
-        String ftpIpUrl = FtpPathParse.hostNameUrl2IpUrl(ftpHostNameUrl);
-        Event event = new Event();
-        event.setRelativePath(file.getAbsolutePath());
-        event.setTimeStamp(metaData.getTimeStamp());
-        event.setAbsolutePath(file.getFileAbsolutePa());
-        event.setFtpHostNameUrlPath(ftpHostNameUrl);
-        event.setFtpIpUrlPath(ftpIpUrl);
-        event.setBigPicurl(bigPicHostNameUrl);
-        event.setIpcId(metaData.getIpcid());
-        event.setDate(metaData.getDate());
-        event.setTimeSlot(metaData.getTimeslot());
-        //发送到rocketMQ
-        RocketMQProducer.getInstance(CollectProperties.getRocketmqAddress(),
-                CollectProperties.getRocketmqCaptureTopic(),
-                CollectProperties.getRokcetmqCaptureGroup()).send(metaData.getIpcid(), metaData.getTimeStamp(), ftpIpUrl.getBytes());
-        context.getScheduler().putData(event);
-    }
-
-    private void sendMQAndReceive(FtpFile file, FtpPathMetaData metaData, FtpServerContext context, List<String> sessionIds) {
-        //拼装ftpUrl (ftp://hostname/)
-        String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());
-        String bigPicHostNameUrl = FtpPathParse.surlToBurl(ftpHostNameUrl);
-        //获取ftpUrl (ftp://ip/)
-        String ftpIpUrl = FtpPathParse.hostNameUrl2IpUrl(ftpHostNameUrl);
-        Event event = new Event();
-        event.setRelativePath(file.getAbsolutePath());
-        event.setTimeStamp(metaData.getTimeStamp());
-        event.setAbsolutePath(file.getFileAbsolutePa());
-        event.setFtpHostNameUrlPath(ftpHostNameUrl);
-        event.setFtpIpUrlPath(ftpIpUrl);
-        event.setBigPicurl(bigPicHostNameUrl);
-        event.setIpcId(metaData.getIpcid());
-        event.setDate(metaData.getDate());
-        event.setTimeSlot(metaData.getTimeslot());
-        //发送到rocketMQ
-        SendMqMessage mqMessage = new SendMqMessage();
-        mqMessage.setSessionIds(sessionIds);
-        mqMessage.setFtpUrl(ftpIpUrl);
-        RocketMQProducer.getInstance(CollectProperties.getRocketmqAddress(),
-                CollectProperties.getRocketmqCaptureTopic(),
-                CollectProperties.getRokcetmqCaptureGroup()).send(metaData.getIpcid(), metaData.getTimeStamp(), JSONUtil.toJson(mqMessage).getBytes());
-        context.getScheduler().putData(event);
-    }
-
-    private void onlyReceive(FtpFile file, FtpPathMetaData metaData, FtpServerContext context) {
-        //拼装ftpUrl (ftp://hostname/)
-        String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());
-        String bigPicHostNameUrl = FtpPathParse.surlToBurl(ftpHostNameUrl);
-        String ftpIpUrl = FtpPathParse.hostNameUrl2IpUrl(ftpHostNameUrl);
-        Event event = new Event();
-        event.setRelativePath(file.getAbsolutePath());
-        event.setTimeStamp(metaData.getTimeStamp());
-        event.setAbsolutePath(file.getFileAbsolutePa());
-        event.setFtpHostNameUrlPath(ftpHostNameUrl);
-        event.setFtpIpUrlPath(ftpIpUrl);
-        event.setBigPicurl(bigPicHostNameUrl);
-        event.setIpcId(metaData.getIpcid());
-        event.setDate(metaData.getDate());
-        event.setTimeSlot(metaData.getTimeslot());
-        context.getScheduler().putData(event);
     }
 }
