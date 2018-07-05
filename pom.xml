@@ -54,11 +54,6 @@
         </dependency>
         <dependency>
             <groupId>com.hzgc.common</groupId>
-            <artifactId>common-jni</artifactId>
-            <version>${bigdata-common.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.hzgc.common</groupId>
             <artifactId>common-collect</artifactId>
             <version>${bigdata-common.version}</version>
         </dependency>

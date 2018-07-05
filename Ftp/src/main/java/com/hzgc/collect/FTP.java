@@ -14,7 +14,7 @@ import com.hzgc.collect.ftp.usermanager.PropertiesUserManagerFactory;
 import com.hzgc.collect.expand.util.CollectProperties;
 import com.hzgc.common.collect.facedis.FtpRegister;
 import com.hzgc.common.collect.facesub.SubscribeRegister;
-import com.hzgc.common.jni.NativeFunction;
+import com.hzgc.jni.NativeFunction;
 import com.hzgc.common.rocketmq.RocketMQProducer;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;

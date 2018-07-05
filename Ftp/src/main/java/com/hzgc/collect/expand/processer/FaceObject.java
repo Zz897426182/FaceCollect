@@ -1,7 +1,7 @@
 package com.hzgc.collect.expand.processer;
 
 
-import com.hzgc.common.jni.FaceAttribute;
+import com.hzgc.jni.FaceAttribute;
 
 import java.io.Serializable;
 
