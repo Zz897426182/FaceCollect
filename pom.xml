@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>Zookeeper</module>
         <module>Ftp</module>
         <module>Distribution</module>
     </modules>
@@ -22,6 +21,8 @@
         <jackson.version>2.9.4</jackson.version>
         <jni.version>1.0</jni.version>
         <jfiglet.version>0.0.3</jfiglet.version>
+        <slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
+        <bigdata-common.version>1.0</bigdata-common.version>
     </properties>
     <dependencies>
         <dependency>
@@ -52,9 +53,19 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.hzgc</groupId>
-            <artifactId>jni</artifactId>
-            <version>${jni.version}</version>
+            <groupId>com.hzgc.common</groupId>
+            <artifactId>common-collect</artifactId>
+            <version>${bigdata-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hzgc.common</groupId>
+            <artifactId>common-util</artifactId>
+            <version>${bigdata-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hzgc.common</groupId>
+            <artifactId>common-rocketmq</artifactId>
+            <version>${bigdata-common.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.lalyos</groupId>
@@ -72,15 +83,9 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.zookeeper</groupId>
-            <artifactId>zookeeper</artifactId>
-            <version>${zookeeper.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j-log4j12.version}</version>
         </dependency>
     </dependencies>
 </project>

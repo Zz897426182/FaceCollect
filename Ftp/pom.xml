@@ -12,11 +12,7 @@
     <groupId>com.hzgc.collect</groupId>
     <artifactId>collect-ftp</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>com.hzgc.collect</groupId>
-            <artifactId>collect-zookeeper</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
+
     </dependencies>
     <build>
         <resources>

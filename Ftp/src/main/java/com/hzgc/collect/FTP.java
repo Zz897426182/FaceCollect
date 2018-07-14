@@ -2,7 +2,6 @@ package com.hzgc.collect;
 
 import com.hzgc.collect.expand.processer.ProducerKafka;
 import com.hzgc.collect.expand.util.FtpLogo;
-import com.hzgc.collect.expand.util.ProducerRocketMQ;
 import com.hzgc.collect.ftp.ClusterOverFtp;
 import com.hzgc.collect.ftp.ConnectionConfigFactory;
 import com.hzgc.collect.ftp.FtpServer;
@@ -13,9 +12,10 @@ import com.hzgc.collect.ftp.ftplet.FtpException;
 import com.hzgc.collect.ftp.listener.ListenerFactory;
 import com.hzgc.collect.ftp.usermanager.PropertiesUserManagerFactory;
 import com.hzgc.collect.expand.util.CollectProperties;
-import com.hzgc.collect.zk.register.FtpRegister;
-import com.hzgc.collect.zk.subscribe.SubscribeRegister;
+import com.hzgc.common.collect.facedis.FtpRegister;
+import com.hzgc.common.collect.facesub.SubscribeRegister;
 import com.hzgc.jni.NativeFunction;
+import com.hzgc.common.rocketmq.RocketMQProducer;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -72,7 +72,9 @@ public class FTP extends ClusterOverFtp implements Serializable {
         ProducerKafka.getInstance();
 
         //初始化ProducerRocketMQ
-        ProducerRocketMQ.getInstance();
+        RocketMQProducer.getInstance(CollectProperties.getRocketmqAddress(),
+                CollectProperties.getRocketmqCaptureTopic(),
+                CollectProperties.getRokcetmqCaptureGroup());
 
         // 在Zookeeper中创建抓拍订阅跟路径
         SubscribeRegister subscribeRegister = new SubscribeRegister(CollectProperties.getZookeeperAddress());
