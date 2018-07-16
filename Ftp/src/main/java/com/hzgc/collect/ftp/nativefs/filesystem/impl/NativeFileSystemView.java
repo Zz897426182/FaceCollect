@@ -19,15 +19,13 @@
 
 package com.hzgc.collect.ftp.nativefs.filesystem.impl;
 
-import com.hzgc.collect.ftp.ftplet.FileSystemView;
-import com.hzgc.collect.ftp.ftplet.FtpException;
-import com.hzgc.collect.ftp.ftplet.FtpFile;
-import com.hzgc.collect.ftp.ftplet.User;
+import com.hzgc.collect.ftp.ftplet.*;
 import com.hzgc.collect.ftp.nativefs.filesystem.NativeFileSystemFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -123,14 +121,51 @@ public class NativeFileSystemView implements FileSystemView {
      */
     public FtpFile getFile(String file) {
 
+        if (!rootDir.equals(FtpHomeDir.getRootDir())){
+            user.setHomeDirectory(rootDir);
+            this.rootDir = FtpHomeDir.getRootDir();
+        }
         // get actual file object
         String physicalName = getPhysicalName(rootDir,
                 currDir, file, caseInsensitive);
         File fileObj = new File(physicalName);
+        File parentFile = fileObj.getParentFile();
+        if (!parentFile.exists()) {
+            boolean success = parentFile.mkdirs();
+            if (success) {
+                LOG.info("Create new directory: " + parentFile.getPath());
 
+            }
+        }
         // strip the root directory and return
         String userFileName = physicalName.substring(rootDir.length() - 1);
         return new NativeFtpFile(userFileName, fileObj, user);
+    }
+
+    public FtpFile getFile_RETR(String file) {
+        String physicalName = getPhysicalName(rootDir,
+                currDir, file, caseInsensitive);
+        File fileObj = new File(physicalName);
+        String userFileName = physicalName.substring(rootDir.length() - 1);
+
+        if (fileObj.isFile()){
+            return new NativeFtpFile(userFileName, fileObj, user);
+        } else {
+            List<String> ladenHomeDirs = FtpHomeDir.getLadenHomeDirs();
+            if (ladenHomeDirs != null && ladenHomeDirs.size() > 0){
+                for (String otherRootDir : ladenHomeDirs){
+                    String otherPhysicalName = getPhysicalName(otherRootDir,
+                            currDir, file, caseInsensitive);
+                    File otherFileObj = new File(otherPhysicalName);
+                    if (otherFileObj.isFile()){
+                        return new NativeFtpFile(userFileName, otherFileObj, user);
+                    }
+                }
+            }else {
+                return new NativeFtpFile(userFileName, fileObj, user);
+            }
+            return new NativeFtpFile(userFileName, fileObj, user);
+        }
     }
 
     /**

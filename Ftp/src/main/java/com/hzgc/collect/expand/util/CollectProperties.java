@@ -33,12 +33,14 @@ public class CollectProperties implements Serializable {
     private static String ftpPathRule;
     private static String ftpAccount;
     private static String ftpPassword;
+    private static String homeDirs;
+    private static float diskUsageRate;
 
     public static String getFtpAccount() {
         return ftpAccount;
     }
 
-    public static void setFtpAccount(String ftpAccount) {
+    private static void setFtpAccount(String ftpAccount) {
         CollectProperties.ftpAccount = ftpAccount;
     }
 
@@ -46,7 +48,7 @@ public class CollectProperties implements Serializable {
         return ftpPassword;
     }
 
-    public static void setFtpPassword(String ftpPassword) {
+    private static void setFtpPassword(String ftpPassword) {
         CollectProperties.ftpPassword = ftpPassword;
     }
 
@@ -74,6 +76,8 @@ public class CollectProperties implements Serializable {
             setFtpPathRule(props.getProperty("ftp.pathRule"));
             setFtpAccount(props.getProperty("ftp.account"));
             setFtpPassword(props.getProperty("ftp.password"));
+            setHomeDirs(props.getProperty("homeDirs"));
+            setDiskUsageRate(Float.parseFloat(props.getProperty("diskUsageRate")));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,7 +89,7 @@ public class CollectProperties implements Serializable {
         return ftpPathRule;
     }
 
-    public static void setFtpPathRule(String ftpPathRule) {
+    private static void setFtpPathRule(String ftpPathRule) {
         CollectProperties.ftpPathRule = ftpPathRule;
     }
 
@@ -93,7 +97,7 @@ public class CollectProperties implements Serializable {
         return registerPath;
     }
 
-    public static void setRegisterPath(String registerPath) {
+    private static void setRegisterPath(String registerPath) {
         CollectProperties.registerPath = registerPath;
     }
 
@@ -101,7 +105,7 @@ public class CollectProperties implements Serializable {
         return proxyPort;
     }
 
-    public static void setProxyPort(String proxyPort) {
+    private static void setProxyPort(String proxyPort) {
         CollectProperties.proxyPort = proxyPort;
     }
 
@@ -117,7 +121,7 @@ public class CollectProperties implements Serializable {
         return ftpSubscribeSwitch;
     }
 
-    public static void setFtpSubscribeSwitch(boolean ftpSubscribeSwitch) {
+    private static void setFtpSubscribeSwitch(boolean ftpSubscribeSwitch) {
         CollectProperties.ftpSubscribeSwitch = ftpSubscribeSwitch;
     }
 
@@ -237,7 +241,23 @@ public class CollectProperties implements Serializable {
         CollectProperties.rokcetmqCaptureGroup = rokcetmqCaptureGroup;
     }
 
-    public static void setProxyIpAddress(String proxyIpAddress) {
+    private static void setProxyIpAddress(String proxyIpAddress) {
         CollectProperties.proxyIpAddress = proxyIpAddress;
+    }
+
+    public static String getHomeDirs() {
+        return homeDirs;
+    }
+
+    private static void setHomeDirs(String homeDirs) {
+        CollectProperties.homeDirs = homeDirs;
+    }
+
+    public static float getDiskUsageRate() {
+        return diskUsageRate;
+    }
+
+    private static void setDiskUsageRate(float diskUsageRate) {
+        CollectProperties.diskUsageRate = diskUsageRate;
     }
 }
