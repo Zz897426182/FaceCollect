@@ -134,7 +134,6 @@ public class NativeFileSystemView implements FileSystemView {
             boolean success = parentFile.mkdirs();
             if (success) {
                 LOG.info("Create new directory: " + parentFile.getPath());
-
             }
         }
         // strip the root directory and return
