@@ -102,7 +102,7 @@ public class FtpHomeDir {
             }
         };
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-        service.scheduleAtFixedRate(runnable, 1, 3600, TimeUnit.MINUTES);
+        service.scheduleAtFixedRate(runnable, 5, 10, TimeUnit.SECONDS);
     }
 
     private float getDiskUsageRate(String dir){

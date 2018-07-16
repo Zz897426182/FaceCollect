@@ -4,20 +4,25 @@ import org.apache.commons.lang3.StringUtils;
 
 public class FtpPathParse {
     private static Parser boxParser = new BoxParser();
-    private static Parser daHuaParser = new DaHuaParser();
+    private static Parser daHuaParser_a = new DaHuaParser_A();
+    private static Parser daHuaParser_b = new DaHuaParser_B();
 
     public static boolean isParse(String fileName){
         if (fileName.contains("dahua")){
-            return daHuaParser.canParse(fileName);
-        }else {
+            return daHuaParser_a.canParse(fileName);
+        } else if (fileName.contains("dahua-b")){
+            return daHuaParser_b.canParse(fileName);
+        } else {
             return boxParser.canParse(fileName);
         }
     }
 
     public static FtpPathMetaData parse(String fileName) {
         if (fileName.contains("dahua")){
-            return daHuaParser.parse(fileName);
-        }else {
+            return daHuaParser_a.parse(fileName);
+        } else if (fileName.contains("dahua-b")){
+            return daHuaParser_b.parse(fileName);
+        } else {
             return boxParser.parse(fileName);
         }
     }
