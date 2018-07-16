@@ -35,6 +35,7 @@ public class CollectProperties implements Serializable {
     private static String ftpPassword;
     private static String homeDirs;
     private static float diskUsageRate;
+    private static long period;
 
     public static String getFtpAccount() {
         return ftpAccount;
@@ -78,7 +79,7 @@ public class CollectProperties implements Serializable {
             setFtpPassword(props.getProperty("ftp.password"));
             setHomeDirs(props.getProperty("homeDirs"));
             setDiskUsageRate(Float.parseFloat(props.getProperty("diskUsageRate")));
-
+            setPeriod(Long.parseLong(props.getProperty("period")));
         } catch (IOException e) {
             e.printStackTrace();
             LOG.error("Catch an unknown error, can't load the configuration file collect.properties");
@@ -259,5 +260,13 @@ public class CollectProperties implements Serializable {
 
     private static void setDiskUsageRate(float diskUsageRate) {
         CollectProperties.diskUsageRate = diskUsageRate;
+    }
+
+    public static long getPeriod() {
+        return period;
+    }
+
+    public static void setPeriod(long period) {
+        CollectProperties.period = period;
     }
 }

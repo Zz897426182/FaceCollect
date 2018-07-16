@@ -23,6 +23,8 @@ public class FtpHomeDir {
     private float usageRate;
     // 当前使用rootDir
     private static String rootDir;
+    // 定时检测周期
+    private long period;
 
     public FtpHomeDir() {
         LOG.info("Start get 'homeDirs' configuration from collect.properties");
@@ -34,6 +36,7 @@ public class FtpHomeDir {
     private void setFtpConfHomeDirs() {
         String[] homeDirs = CollectProperties.getHomeDirs().split(",");
         float diskUsageRate = CollectProperties.getDiskUsageRate();
+        long periodConf = CollectProperties.getPeriod();
         if (homeDirs.length == 0 || diskUsageRate == 0) {
             LOG.error("Get 'homeDirs' or 'diskUsageRate' configuration failed from collect.properties");
             return;
@@ -49,6 +52,7 @@ public class FtpHomeDir {
         LOG.info("Collect.properties configuration: homeDirs: " + Arrays.toString(ftpConfHomeDirs.toArray()));
         LOG.info("Collect.properties configuration: diskUsageRate: " + diskUsageRate);
         this.usageRate = diskUsageRate;
+        this.period = periodConf;
     }
 
     private void setLadenOrNotLadenHomeDirs(){
@@ -102,7 +106,7 @@ public class FtpHomeDir {
             }
         };
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-        service.scheduleAtFixedRate(runnable, 5, 10, TimeUnit.SECONDS);
+        service.scheduleAtFixedRate(runnable, 1, period, TimeUnit.MINUTES);
     }
 
     private float getDiskUsageRate(String dir){
