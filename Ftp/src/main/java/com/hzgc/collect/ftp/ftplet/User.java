@@ -82,4 +82,9 @@ public interface User {
      * @return The path to the home directory for the user
      */
     String getHomeDirectory();
+
+    /**
+     * Set the user home directory.
+     */
+    void setHomeDirectory(String home);
 }

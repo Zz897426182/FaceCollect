@@ -75,7 +75,7 @@ public class RETR extends AbstractCommand {
             // get file object
             FtpFile file = null;
             try {
-                file = session.getFileSystemView().getFile(fileName);
+                file = session.getFileSystemView().getFile_RETR(fileName);
             } catch (Exception ex) {
                 LOG.debug("Exception getting file object", ex);
             }
