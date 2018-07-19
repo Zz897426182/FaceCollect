@@ -30,7 +30,7 @@ import java.util.StringTokenizer;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ * <p>
  * File system view based on native file system. Here the root directory will be
  * user virtual root (/).
  *
@@ -39,11 +39,11 @@ import java.util.StringTokenizer;
 public class NativeFileSystemView implements FileSystemView {
 
     private final Logger LOG = LoggerFactory
-    .getLogger(NativeFileSystemView.class);
+            .getLogger(NativeFileSystemView.class);
 
 
     // the root directory will always end with '/'.
-    private String rootDir;
+    private volatile String rootDir;
 
     // the first and the last character will always be '/'
     // It is always with respect to the root directory.
@@ -83,9 +83,9 @@ public class NativeFileSystemView implements FileSystemView {
         if (!rootDir.endsWith("/")) {
             rootDir += '/';
         }
-        
+
         LOG.debug("Native filesystem view created for user \"{}\" with root \"{}\"", user.getName(), rootDir);
-        
+
         this.rootDir = rootDir;
 
         this.user = user;
@@ -98,6 +98,7 @@ public class NativeFileSystemView implements FileSystemView {
      * user.
      */
     public FtpFile getHomeDirectory() {
+        checkRootDir();
         return new NativeFtpFile("/", new File(rootDir), user);
     }
 
@@ -105,6 +106,7 @@ public class NativeFileSystemView implements FileSystemView {
      * Get the current directory.
      */
     public FtpFile getWorkingDirectory() {
+        checkRootDir();
         FtpFile fileObj = null;
         if (currDir.equals("/")) {
             fileObj = new NativeFtpFile("/", new File(rootDir), user);
@@ -120,11 +122,7 @@ public class NativeFileSystemView implements FileSystemView {
      * Get file object.
      */
     public FtpFile getFile(String file) {
-
-        if (!rootDir.equals(FtpHomeDir.getRootDir())){
-            user.setHomeDirectory(rootDir);
-            this.rootDir = FtpHomeDir.getRootDir();
-        }
+        checkRootDir();
         // get actual file object
         String physicalName = getPhysicalName(rootDir,
                 currDir, file, caseInsensitive);
@@ -141,26 +139,34 @@ public class NativeFileSystemView implements FileSystemView {
         return new NativeFtpFile(userFileName, fileObj, user);
     }
 
+    private void checkRootDir() {
+        if (!rootDir.equals(FtpHomeDir.getRootDir())) {
+            user.setHomeDirectory(FtpHomeDir.getRootDir());
+            this.rootDir = FtpHomeDir.getRootDir();
+        }
+    }
+
     public FtpFile getFile_RETR(String file) {
+        checkRootDir();
         String physicalName = getPhysicalName(rootDir,
                 currDir, file, caseInsensitive);
         File fileObj = new File(physicalName);
         String userFileName = physicalName.substring(rootDir.length() - 1);
 
-        if (fileObj.isFile()){
+        if (fileObj.isFile()) {
             return new NativeFtpFile(userFileName, fileObj, user);
         } else {
-            List<String> ladenHomeDirs = FtpHomeDir.getLadenHomeDirs();
-            if (ladenHomeDirs != null && ladenHomeDirs.size() > 0){
-                for (String otherRootDir : ladenHomeDirs){
+            List <String> ladenHomeDirs = FtpHomeDir.getLadenHomeDirs();
+            if (ladenHomeDirs != null && ladenHomeDirs.size() > 0) {
+                for (String otherRootDir : ladenHomeDirs) {
                     String otherPhysicalName = getPhysicalName(otherRootDir,
                             currDir, file, caseInsensitive);
                     File otherFileObj = new File(otherPhysicalName);
-                    if (otherFileObj.isFile()){
+                    if (otherFileObj.isFile()) {
                         return new NativeFtpFile(userFileName, otherFileObj, user);
                     }
                 }
-            }else {
+            } else {
                 return new NativeFtpFile(userFileName, fileObj, user);
             }
             return new NativeFtpFile(userFileName, fileObj, user);
@@ -171,7 +177,7 @@ public class NativeFileSystemView implements FileSystemView {
      * Change directory.
      */
     public boolean changeWorkingDirectory(String dir) {
-
+        checkRootDir();
         // not a directory - return false
         dir = getPhysicalName(rootDir, currDir, dir,
                 caseInsensitive);
@@ -202,24 +208,21 @@ public class NativeFileSystemView implements FileSystemView {
      */
     public void dispose() {
     }
-    
+
     /**
      * Get the physical canonical file name. It works like
      * File.getCanonicalPath().
-     * 
-     * @param rootDir
-     *            The root directory.
-     * @param currDir
-     *            The current directory. It will always be with respect to the
-     *            root directory.
-     * @param fileName
-     *            The input file name.
+     *
+     * @param rootDir  The root directory.
+     * @param currDir  The current directory. It will always be with respect to the
+     *                 root directory.
+     * @param fileName The input file name.
      * @return The return string will always begin with the root directory. It
-     *         will never be null.
+     * will never be null.
      */
     protected String getPhysicalName(final String rootDir,
-            final String currDir, final String fileName,
-            final boolean caseInsensitive) {
+                                     final String currDir, final String fileName,
+                                     final boolean caseInsensitive) {
 
         // normalize root dir
         String normalizedRootDir = normalizeSeparateChar(rootDir);
@@ -228,7 +231,7 @@ public class NativeFileSystemView implements FileSystemView {
         // normalize file name
         String normalizedFileName = normalizeSeparateChar(fileName);
         String result;
-        
+
         // if file name is relative, set resArg to root dir + curr dir
         // if file name is absolute, set resArg to root dir
         if (normalizedFileName.charAt(0) != '/') {
@@ -266,12 +269,12 @@ public class NativeFileSystemView implements FileSystemView {
                 continue;
             } else {
                 // token is normal directory name
-                
-                if(caseInsensitive) {
+
+                if (caseInsensitive) {
                     // we're case insensitive, find a directory with the name, ignoring casing
                     File[] matches = new File(result)
                             .listFiles(new NameEqualsFileFilter(tok, true));
-    
+
                     if (matches != null && matches.length > 0) {
                         // found a file matching tok, replace tok for get the right casing
                         tok = matches[0].getName();
@@ -279,7 +282,7 @@ public class NativeFileSystemView implements FileSystemView {
                 }
 
                 result = result + '/' + tok;
-    
+
             }
         }
 
@@ -306,7 +309,7 @@ public class NativeFileSystemView implements FileSystemView {
             return path;
         }
     }
-    
+
     /**
      * Prepend leading slash ('/') if missing
      */
@@ -317,7 +320,7 @@ public class NativeFileSystemView implements FileSystemView {
             return path;
         }
     }
-    
+
     /**
      * Trim trailing slash ('/') if existing
      */
@@ -328,7 +331,7 @@ public class NativeFileSystemView implements FileSystemView {
             return path;
         }
     }
-    
+
     /**
      * Normalize separate character. Separate character should be '/' always.
      */
@@ -337,16 +340,16 @@ public class NativeFileSystemView implements FileSystemView {
         normalizedPathName = normalizedPathName.replace('\\', '/');
         return normalizedPathName;
     }
-    
+
     /**
-     * Normalize separator char, append and prepend slashes. Default to 
+     * Normalize separator char, append and prepend slashes. Default to
      * defaultPath if null or empty
      */
     private String normalize(String path, String defaultPath) {
-        if(path == null || path.trim().length() == 0) {
+        if (path == null || path.trim().length() == 0) {
             path = defaultPath;
         }
-        
+
         path = normalizeSeparateChar(path);
         path = prependSlash(appendSlash(path));
         return path;
