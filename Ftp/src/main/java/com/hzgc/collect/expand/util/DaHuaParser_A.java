@@ -1,6 +1,10 @@
 package com.hzgc.collect.expand.util;
 
-public class DaHuaParser implements Parser {
+/**
+ * 大华抓拍机路径解析
+ * 相机配置根路径: dahua
+ */
+public class DaHuaParser_A implements Parser {
     @Override
     public boolean canParse(String path) {
         if (path.contains("unknown") || !path.contains(".jpg")) {

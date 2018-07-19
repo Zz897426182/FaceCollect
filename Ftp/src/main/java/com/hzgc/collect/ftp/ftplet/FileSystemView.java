@@ -56,6 +56,8 @@ public interface FileSystemView {
      */
     FtpFile getFile(String file) throws FtpException;
 
+    FtpFile getFile_RETR(String file) throws FtpException;
+
     /**
      * Does the file system support random file access?
      * @return true if the file supports random access

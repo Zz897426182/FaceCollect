@@ -7,6 +7,7 @@ import com.hzgc.collect.ftp.ConnectionConfigFactory;
 import com.hzgc.collect.ftp.FtpServer;
 import com.hzgc.collect.ftp.FtpServerFactory;
 import com.hzgc.collect.ftp.command.CommandFactoryFactory;
+import com.hzgc.collect.ftp.ftplet.FtpHomeDir;
 import com.hzgc.collect.ftp.nativefs.filesystem.NativeFileSystemFactory;
 import com.hzgc.collect.ftp.ftplet.FtpException;
 import com.hzgc.collect.ftp.listener.ListenerFactory;
@@ -67,6 +68,11 @@ public class FTP extends ClusterOverFtp implements Serializable {
         PropertyConfigurator.configureAndWatch(
                 ClassLoader.getSystemResource("log4j.properties").getPath(), 5000);
         LOG.info("Dynamic log configuration is successful! Log configuration file refresh time 5000ms");
+
+        // 初始化FTP当前已满磁盘、未满磁盘、RootDir
+        FtpHomeDir ftpHomeDir = new FtpHomeDir();
+        // 开启FTP磁盘检查线程
+        ftpHomeDir.periodicallyCheckCurrentRootDir();
 
         //初始化ProducerKafka
         ProducerKafka.getInstance();
