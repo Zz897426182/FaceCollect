@@ -16,7 +16,6 @@ import com.hzgc.collect.expand.util.CollectProperties;
 import com.hzgc.common.collect.facedis.FtpRegisterClient;
 import com.hzgc.common.collect.facedis.FtpRegisterInfo;
 import com.hzgc.common.collect.facesub.FtpSubscribeClient;
-import com.hzgc.common.util.json.JSONUtil;
 import com.hzgc.jni.NativeFunction;
 import com.hzgc.common.rocketmq.RocketMQProducer;
 import org.apache.log4j.Logger;
@@ -24,7 +23,6 @@ import org.apache.log4j.PropertyConfigurator;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.Arrays;
 
 public class FTP extends ClusterOverFtp implements Serializable {
 
