@@ -16,6 +16,7 @@ import com.hzgc.collect.expand.util.CollectProperties;
 import com.hzgc.common.collect.facedis.FtpRegisterClient;
 import com.hzgc.common.collect.facedis.FtpRegisterInfo;
 import com.hzgc.common.collect.facesub.FtpSubscribeClient;
+import com.hzgc.common.util.json.JSONUtil;
 import com.hzgc.jni.NativeFunction;
 import com.hzgc.common.rocketmq.RocketMQProducer;
 import org.apache.log4j.Logger;
@@ -23,6 +24,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class FTP extends ClusterOverFtp implements Serializable {
 
@@ -95,10 +97,30 @@ public class FTP extends ClusterOverFtp implements Serializable {
                         CollectProperties.getFtpIp(),
                         CollectProperties.getHostname(),
                         String.valueOf(CollectProperties.getFtpPort()),
-                        "face"));
+                        CollectProperties.getFtpType()));
 
         // ftp抓拍订阅功能
         new FtpSubscribeClient(CollectProperties.getZookeeperAddress());
+
+        Runnable test = () -> {
+            while (true){
+                LOG.info("*************************************************************");
+                LOG.info("Total ftp register info:" + Arrays.toString(ftpRegister.getFtpRegisterInfoList().toArray()));
+                LOG.info("Face ftp register info:" + Arrays.toString(ftpRegister.getFaceFtpRegisterInfoList().toArray()));
+                LOG.info("Car ftp register info:" + Arrays.toString(ftpRegister.getCarFtpRegisterInfoList().toArray()));
+                LOG.info("Person ftp register info:" + Arrays.toString(ftpRegister.getPersonFtpRegisterInfoList().toArray()));
+                LOG.info("Ftp ip and hostname mapping:" + JSONUtil.toJson(ftpRegister.getFtpIpMapping()));
+                LOG.info("****** " + JSONUtil.toJson(FtpSubscribeClient.getSessionMap()));
+                LOG.info("*************************************************************");
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread = new Thread(test);
+        thread.start();
 
         FtpServer server = serverFactory.createServer();
         try {
