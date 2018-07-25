@@ -4,7 +4,7 @@ import com.hzgc.collect.expand.receiver.Event;
 import com.hzgc.collect.expand.util.CollectProperties;
 import com.hzgc.collect.expand.util.SendMqMessage;
 import com.hzgc.common.collect.bean.FaceObject;
-import com.hzgc.common.collect.facesub.SubscribeInfo;
+import com.hzgc.common.collect.facesub.FtpSubscribeClient;
 import com.hzgc.common.rocketmq.RocketMQProducer;
 import com.hzgc.common.util.file.FileUtil;
 import com.hzgc.common.util.json.JSONUtil;
@@ -18,6 +18,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
 public class ProcessThread implements Runnable {
@@ -41,9 +42,11 @@ public class ProcessThread implements Runnable {
                     continue;
                 }
                 if (CollectProperties.isFtpSubscribeSwitch()) {
-                    if (!SubscribeInfo.getSessionMap().isEmpty()) {
-                        if (SubscribeInfo.getSessionMap().containsKey(event.getIpcId())) {
-                            List<String> sessionIds = SubscribeInfo.getSessionMap().get(event.getIpcId());
+                    // ftpSubscribeMap: key is ipcId, value is sessionIds
+                    Map<String, List<String>> ftpSubscribeMap =FtpSubscribeClient.getSessionMap();
+                    if (!ftpSubscribeMap.isEmpty()) {
+                        if (ftpSubscribeMap.containsKey(event.getIpcId())) {
+                            List<String> sessionIds = ftpSubscribeMap.get(event.getIpcId());
                             sendMQ(event, sessionIds);
                         }
                     }

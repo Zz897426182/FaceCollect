@@ -15,6 +15,7 @@ public class CollectProperties implements Serializable {
     private static int receiveQueueCapacity;
     private static int receiveNumber;
     private static int faceDetectorNumber;
+    private static String ftpType;
     private static String ftpIp;
     private static int ftpPort;
     private static String dataPorts;
@@ -59,6 +60,7 @@ public class CollectProperties implements Serializable {
             setReceiveQueueCapacity(Integer.parseInt(props.getProperty("receive.queue.capacity")));
             setReceiveNumber(Integer.parseInt(props.getProperty("receive.number")));
             setFaceDetectorNumber(Integer.parseInt(props.getProperty("face.detector.number")));
+            setFtpType(props.getProperty("ftp.type"));
             setFtpIp(props.getProperty("ftp.ip"));
             setFtpPort(Integer.parseInt(props.getProperty("ftp.port")));
             setDataPorts(props.getProperty("data.ports"));
@@ -128,6 +130,14 @@ public class CollectProperties implements Serializable {
 
     public static void setProps(Properties props) {
         CollectProperties.props = props;
+    }
+
+    public static String getFtpType() {
+        return ftpType;
+    }
+
+    public static void setFtpType(String ftpType) {
+        CollectProperties.ftpType = ftpType;
     }
 
     public static String getFtpIp() {
