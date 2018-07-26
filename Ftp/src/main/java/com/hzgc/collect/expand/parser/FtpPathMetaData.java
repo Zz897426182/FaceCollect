@@ -1,4 +1,4 @@
-package com.hzgc.collect.expand.util;
+package com.hzgc.collect.expand.parser;
 
 import java.io.Serializable;
 

@@ -1,5 +1,7 @@
 package com.hzgc.collect.expand.util;
 
+import com.hzgc.collect.expand.parser.FtpPathMetaData;
+
 import java.io.Serializable;
 
 public class FtpUrlMetaData extends FtpPathMetaData implements Serializable {

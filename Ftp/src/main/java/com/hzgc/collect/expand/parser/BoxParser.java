@@ -1,4 +1,4 @@
-package com.hzgc.collect.expand.util;
+package com.hzgc.collect.expand.parser;
 
 public class BoxParser implements Parser {
     /**
@@ -53,5 +53,14 @@ public class BoxParser implements Parser {
             return message;
         }
         return null;
+    }
+
+    @Override
+    public String surlToBurl(String surl) {
+        StringBuilder burl = new StringBuilder();
+        String s1 = surl.substring(0, surl.lastIndexOf("_") + 1);
+        String s2 = surl.substring(surl.lastIndexOf("."));
+        burl.append(s1).append(0).append(s2);
+        return burl.toString();
     }
 }

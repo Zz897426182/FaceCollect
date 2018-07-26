@@ -19,6 +19,7 @@
 
 package com.hzgc.collect.ftp.nativefs.filesystem.impl;
 
+import com.hzgc.collect.expand.parser.DeviceUtil;
 import com.hzgc.collect.ftp.ftplet.*;
 import com.hzgc.collect.ftp.nativefs.filesystem.NativeFileSystemFactory;
 import org.slf4j.Logger;
@@ -128,6 +129,10 @@ public class NativeFileSystemView implements FileSystemView {
         // get actual file object
         String physicalName = getPhysicalName(rootDir,
                 currDir, file, caseInsensitive);
+        if (physicalName.contains(DeviceUtil.DaHua_GongChengJi) && physicalName.contains(".jpg")){
+            physicalName = physicalName.substring(0, physicalName.length() - 4)
+                    .replace(".", "/") + ".jpg";
+        }
         File fileObj = new File(physicalName);
         File parentFile = fileObj.getParentFile();
         if (!parentFile.exists()) {

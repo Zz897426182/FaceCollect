@@ -1,10 +1,10 @@
-package com.hzgc.collect.expand.util;
+package com.hzgc.collect.expand.parser;
 
 /**
  * 大华抓拍机路径解析
- * 相机配置根路径: dahua
+ * 相机配置根路径: IPC-HFW5238M-AS-I1
  */
-public class DaHuaParser_A implements Parser {
+public class DaHuaParser_ZhuaPaiJi implements Parser {
     @Override
     public boolean canParse(String path) {
         if (path.contains("unknown") || !path.contains(".jpg")) {
@@ -14,7 +14,9 @@ public class DaHuaParser_A implements Parser {
         return Integer.parseInt(tmpStr) > 0;
     }
 
-    // /dahua/ipcid/2018-01-01/001/jpg/12/12/01[M][0@0][0].jpg
+    /**
+     * eg: /IPC-HFW5238M-AS-I1/3J07C6FPAU00272/2018-07-25/001/jpg/09/50/04[M][0@0][1].jpg
+     */
     @Override
     public FtpPathMetaData parse(String path) {
         FtpPathMetaData message = new FtpPathMetaData();
@@ -45,5 +47,18 @@ public class DaHuaParser_A implements Parser {
             message.setTimeslot(Integer.parseInt(sj.toString()));
         }
         return message;
+    }
+
+    /**
+     * eg:
+     * ftp://s100:2121/IPC-HFW5238M-AS-I1/3J07C6FPAU00272/2018-07-25/001/jpg/09/50/04[M][0@0][1].jpg
+     * ------>
+     * ftp://s100:2121/IPC-HFW5238M-AS-I1/3J07C6FPAU00272/2018-07-25/001/jpg/09/50/04[M][0@0][0].jpg
+     */
+    @Override
+    public String surlToBurl(String surl) {
+        String frontStr = surl.substring(0, surl.lastIndexOf("[") + 1);
+        String backStr = surl.substring(surl.lastIndexOf("[") + 2, surl.length());
+        return frontStr + 0 + backStr;
     }
 }
