@@ -1,27 +1,28 @@
-package com.hzgc.collect.expand.util;
+package com.hzgc.collect.expand.parser;
 
+import com.hzgc.collect.expand.util.CollectProperties;
 import org.apache.commons.lang3.StringUtils;
 
 public class FtpPathParse {
     private static Parser boxParser = new BoxParser();
-    private static Parser daHuaParser_a = new DaHuaParser_A();
-    private static Parser daHuaParser_b = new DaHuaParser_B();
+    private static Parser daHuaParser_zhuaPaiJi = new DaHuaParser_ZhuaPaiJi();
+    private static Parser daHuaParser_gongChengJi = new DaHuaParser_GongChengJi();
 
     public static boolean isParse(String fileName){
-        if (fileName.contains("dahua")){
-            return daHuaParser_a.canParse(fileName);
-        } else if (fileName.contains("dahua-b")){
-            return daHuaParser_b.canParse(fileName);
+        if (fileName.contains(DeviceUtil.DaHua_ZhuaPaiJi)){
+            return daHuaParser_zhuaPaiJi.canParse(fileName);
+        } else if (fileName.contains(DeviceUtil.DaHua_GongChengJi)){
+            return daHuaParser_gongChengJi.canParse(fileName);
         } else {
             return boxParser.canParse(fileName);
         }
     }
 
     public static FtpPathMetaData parse(String fileName) {
-        if (fileName.contains("dahua")){
-            return daHuaParser_a.parse(fileName);
-        } else if (fileName.contains("dahua-b")){
-            return daHuaParser_b.parse(fileName);
+        if (fileName.contains(DeviceUtil.DaHua_ZhuaPaiJi)){
+            return daHuaParser_zhuaPaiJi.parse(fileName);
+        } else if (fileName.contains(DeviceUtil.DaHua_GongChengJi)){
+            return daHuaParser_gongChengJi.parse(fileName);
         } else {
             return boxParser.parse(fileName);
         }
@@ -49,7 +50,7 @@ public class FtpPathParse {
      * @param filePath ftp接收数据路径
      * @return 文件的ftp地址
      */
-    public static String ftpPath2HostNamepath(String filePath) {
+    public static String ftpPath2HostNameUrl(String filePath) {
         StringBuilder url = new StringBuilder();
         String hostName = CollectProperties.getHostname();
         url = url.append("ftp://").append(hostName).append(":").append(CollectProperties.getFtpPort()).append(filePath);
@@ -63,10 +64,12 @@ public class FtpPathParse {
      * @return 大图ftpUrl
      */
     public static String surlToBurl(String surl) {
-        StringBuilder burl = new StringBuilder();
-        String s1 = surl.substring(0, surl.lastIndexOf("_") + 1);
-        String s2 = surl.substring(surl.lastIndexOf("."));
-        burl.append(s1).append(0).append(s2);
-        return burl.toString();
+        if (surl.contains(DeviceUtil.DaHua_ZhuaPaiJi)){
+            return daHuaParser_zhuaPaiJi.surlToBurl(surl);
+        } else if (surl.contains(DeviceUtil.DaHua_GongChengJi)){
+            return daHuaParser_gongChengJi.surlToBurl(surl);
+        } else {
+            return boxParser.surlToBurl(surl);
+        }
     }
 }

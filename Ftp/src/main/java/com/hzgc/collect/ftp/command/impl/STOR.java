@@ -1,7 +1,8 @@
 package com.hzgc.collect.ftp.command.impl;
 
+import com.hzgc.collect.expand.parser.FtpPathMetaData;
+import com.hzgc.collect.expand.parser.FtpPathParse;
 import com.hzgc.collect.expand.receiver.Event;
-import com.hzgc.collect.expand.util.*;
 import com.hzgc.collect.ftp.command.AbstractCommand;
 import com.hzgc.collect.ftp.ftplet.*;
 import com.hzgc.collect.ftp.impl.*;
@@ -145,7 +146,7 @@ public class STOR extends AbstractCommand {
                     FtpPathMetaData metaData = FtpPathParse.parse(fileName);
                     if (metaData != null) {
                         //拼装ftpUrl (ftp://hostname/)
-                        String ftpHostNameUrl = FtpPathParse.ftpPath2HostNamepath(file.getAbsolutePath());
+                        String ftpHostNameUrl = FtpPathParse.ftpPath2HostNameUrl(file.getAbsolutePath());
                         String bigPicHostNameUrl = FtpPathParse.surlToBurl(ftpHostNameUrl);
                         //获取ftpUrl (ftp://ip/)
                         String ftpIpUrl = FtpPathParse.hostNameUrl2IpUrl(ftpHostNameUrl);
